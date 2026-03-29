@@ -1,0 +1,702 @@
+[
+  {
+    "id": "v2_001",
+    "wav": "v2_001.wav",
+    "text": "そうなんですよ。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_002",
+    "wav": "v2_002.wav",
+    "text": "はい、お願いいたします。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_003",
+    "wav": "v2_003.wav",
+    "text": "新しいものに変えられるって方がやっぱりいらっしゃるんですね、特に事業されてる方は。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_004",
+    "wav": "v2_004.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_005",
+    "wav": "v2_005.wav",
+    "text": "お世話になっております。私以前事業用Wi-Fiの取次を担当しておりました、ITパートナーのみずのと申しまして。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_006",
+    "wav": "v2_006.wav",
+    "text": "あ、わかりました。もし繋がらなかったらまたちょっと後日の10時頃一度ご連絡させていただいて。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_007",
+    "wav": "v2_007.wav",
+    "text": "はい。",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_008",
+    "wav": "v2_008.wav",
+    "text": "はい、現在ご利用いただいております事業用Wi-Fiルーターの更新の件でのご連絡だったんですが、実はご担当者様はお手すきでしたでしょうか。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_009",
+    "wav": "v2_009.wav",
+    "text": "あ、もしもし",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_010",
+    "wav": "v2_010.wav",
+    "text": "",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_011",
+    "wav": "v2_011.wav",
+    "text": "最新型の端末で無料での交換で終わったので、ということでサポートのご連絡をさせていただいてたんですよね。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_012",
+    "wav": "v2_012.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_013",
+    "wav": "v2_013.wav",
+    "text": "すいません、ちょっとお時間いただいてありがとうございました。また何かありましたら、よろしくお願いいたします。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_014",
+    "wav": "v2_014.wav",
+    "text": "白い四角い15センチから20センチぐらいの",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_015",
+    "wav": "v2_015.wav",
+    "text": "",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_016",
+    "wav": "v2_016.wav",
+    "text": "わかりました、すいません、であればご不要なご連絡でした。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_017",
+    "wav": "v2_017.wav",
+    "text": "公開いただく端末だったんですが、白い平べったい端末になりまして、",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_018",
+    "wav": "v2_018.wav",
+    "text": "ただWi-Fiとかも、例えばお客様とかだけに何か提供されてるだけとか、そんな使ってないよとかっていうのであれば。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_019",
+    "wav": "v2_019.wav",
+    "text": "パートナーの水野と申します。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_020",
+    "wav": "v2_020.wav",
+    "text": "はい、後日ご郵送で新しい端末をお送りいたしますので、届きましたら差し替えをお願いしておりまして。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_021",
+    "wav": "v2_021.wav",
+    "text": "はい、お願いいたします。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_022",
+    "wav": "v2_022.wav",
+    "text": "お世話になっております。野口様竹内様で間違いなかったでしょうか。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_023",
+    "wav": "v2_023.wav",
+    "text": "やれば一応強制とかではなかったので。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_024",
+    "wav": "v2_024.wav",
+    "text": "失礼。",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_025",
+    "wav": "v2_025.wav",
+    "text": "なので今もう切り替えられてる具合ようでしたので、実は私今回こうね、ちょっとこう不要な誤りなくとなってしまってましたので。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_026",
+    "wav": "v2_026.wav",
+    "text": "もしよろしければ私の方から折り返しさせていただければと思うんですけども。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_027",
+    "wav": "v2_027.wav",
+    "text": "あ、そうだったんですね、かしこま。本日はもうお戻りとかにはなられなかったですかね?",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_028",
+    "wav": "v2_028.wav",
+    "text": "もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_029",
+    "wav": "v2_029.wav",
+    "text": "",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_030",
+    "wav": "v2_030.wav",
+    "text": "",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_031",
+    "wav": "v2_031.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_032",
+    "wav": "v2_032.wav",
+    "text": "D-Linkって読む端末。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_033",
+    "wav": "v2_033.wav",
+    "text": "5年前の端末なんですよ、ごめんなさい、6年前ですね。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_034",
+    "wav": "v2_034.wav",
+    "text": "分かりました。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_035",
+    "wav": "v2_035.wav",
+    "text": "あれはそちらがモデムになるんですよね。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_036",
+    "wav": "v2_036.wav",
+    "text": "こちらをお選びいただいてたんですけども、どうされますか、というので私たちのほうからも強制とかではなかったので。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_037",
+    "wav": "v2_037.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_038",
+    "wav": "v2_038.wav",
+    "text": "月々ですね。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_039",
+    "wav": "v2_039.wav",
+    "text": "そうなんですよ、でNTT様でないって考えると、今別のところから請求って来られてました?",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_040",
+    "wav": "v2_040.wav",
+    "text": "なので",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_041",
+    "wav": "v2_041.wav",
+    "text": "大丈夫ですよ。以前のご利用いただいてたものだったんですけども、今もう変えられてるっていうことだったので。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_042",
+    "wav": "v2_042.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_043",
+    "wav": "v2_043.wav",
+    "text": "よろしくお願いいたします。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_044",
+    "wav": "v2_044.wav",
+    "text": "",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_045",
+    "wav": "v2_045.wav",
+    "text": "お世話になっております。私以前事業用Wi-Fiの件でご連絡をしておりました。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_046",
+    "wav": "v2_046.wav",
+    "text": "CISCOでシスコーとか。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_047",
+    "wav": "v2_047.wav",
+    "text": "だいたい15センチから20センチくらいの、15センチですね。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_048",
+    "wav": "v2_048.wav",
+    "text": "ああ、そうですよね。かしこまりました。であれば、ちょっとタイミング見て、またご連絡、あの1時間以内に、ちょっとご連絡はさせていただきますので。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_049",
+    "wav": "v2_049.wav",
+    "text": "後日",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_050",
+    "wav": "v2_050.wav",
+    "text": "なるほどですね、かしこまりました。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_051",
+    "wav": "v2_051.wav",
+    "text": "それは",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_052",
+    "wav": "v2_052.wav",
+    "text": "一度私の方でももう一度確認してみます。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_053",
+    "wav": "v2_053.wav",
+    "text": "なるほど。",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_054",
+    "wav": "v2_054.wav",
+    "text": "そうしましたら数点確認事項ございまして、いずれいただいておりました屋号名様になるんですが、ビーンハット奥沢様でお間違いなかったですかね?",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_055",
+    "wav": "v2_055.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_056",
+    "wav": "v2_056.wav",
+    "text": "はい、失礼いたします。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_057",
+    "wav": "v2_057.wav",
+    "text": "だと、今の現状だともしかすると2200円で、あの、",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_058",
+    "wav": "v2_058.wav",
+    "text": "はい、なのでここのサービスの内容が変わるものだったので、",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_059",
+    "wav": "v2_059.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_060",
+    "wav": "v2_060.wav",
+    "text": "だいたいそうですね、本来ですと他のお客様ですと4000円から5000円いかないかくらいでお支払いいただいているものになるんですよね。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_061",
+    "wav": "v2_061.wav",
+    "text": "もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_062",
+    "wav": "v2_062.wav",
+    "text": "そうです。",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_063",
+    "wav": "v2_063.wav",
+    "text": "その",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_064",
+    "wav": "v2_064.wav",
+    "text": "お電話をお借りいただきありがとうございます。私以前事業用Wi-Fiの取次を担当しておりましたITパートナーの水野と申しまして。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_065",
+    "wav": "v2_065.wav",
+    "text": "はい、後日ご郵送で新しい端末をお送り出しますので、届きましたら差し替えをお願いしておりまして。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_066",
+    "wav": "v2_066.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_067",
+    "wav": "v2_067.wav",
+    "text": "スートッカーであれば。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_068",
+    "wav": "v2_068.wav",
+    "text": "ではそちらで大丈夫そうですかね。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_069",
+    "wav": "v2_069.wav",
+    "text": "どんどん更新していってほしくてってことで皆さんもいろいろ変えられたりするんですよね。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_070",
+    "wav": "v2_070.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_071",
+    "wav": "v2_071.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_072",
+    "wav": "v2_072.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_073",
+    "wav": "v2_073.wav",
+    "text": "そうですそうです、今サポートのご連絡をさせていただいているんですけども、以前お取次ぎさせていただいたのが2020年だったんですよね。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_074",
+    "wav": "v2_074.wav",
+    "text": "承知しました。そういった端末ってご自身で変えたりすることって可能そうです?例えば脚立に乗ってとかであれば。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_075",
+    "wav": "v2_075.wav",
+    "text": "わかりました。であればこちらのご携帯番号の方にも一度ご連絡させていただいて、吹原様の方にも一度こちらの部分内容をお伝えさせていただければと思いますので。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_076",
+    "wav": "v2_076.wav",
+    "text": "でもし今正直言いますと、こちら矯正とかの内容ではなかったので、そのままでいいっていうのであれば全然そのままでも問題はない内容ではあったんですよね。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_077",
+    "wav": "v2_077.wav",
+    "text": "あ、もしもし",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_078",
+    "wav": "v2_078.wav",
+    "text": "使って使われてました。モデムとかは。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_079",
+    "wav": "v2_079.wav",
+    "text": "わかりました。またちょっとお日にちとかも改めてわからないですね。あ、いや、大丈夫ですよ。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_080",
+    "wav": "v2_080.wav",
+    "text": "お世話になってます。私先ほどWi-Fiの件でご連絡してたITパートナーの水野と申しまして、どうでしたかね端末。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_081",
+    "wav": "v2_081.wav",
+    "text": "ちなみに、もしつながらなかった場合、一応固定のお電話番号にもう一度ちょっとこちらのご連絡先の方にご連絡させていただけたかったんですけども、吹春様。",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_082",
+    "wav": "v2_082.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_083",
+    "wav": "v2_083.wav",
+    "text": "もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_084",
+    "wav": "v2_084.wav",
+    "text": "強制ではないので、交換はしなくてもいいものではあったんですけども、ただですね、端末自体も古くなってるものだったので、",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_085",
+    "wav": "v2_085.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_086",
+    "wav": "v2_086.wav",
+    "text": "あっ。",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_087",
+    "wav": "v2_087.wav",
+    "text": "後ろ側に多分型番とか入ってたりするんですけども、反対側の",
+    "category": "number",
+    "verified": true
+  },
+  {
+    "id": "v2_088",
+    "wav": "v2_088.wav",
+    "text": "",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_089",
+    "wav": "v2_089.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_090",
+    "wav": "v2_090.wav",
+    "text": "ありがとうございます。そうしましたら私、水野の方での確認以上になりまして、担当窓口の者からですね、新しい端末ご送付の流れについてご連絡させていただいているのと、先ほどちょっと私全部口頭でお話しすべてしてたので、メールですね、本田様の方にも一通送らせていただいて、本田様の方でメール見ていただいてからの端末ご発送になりますので。",
+    "category": "proper_noun",
+    "verified": true
+  },
+  {
+    "id": "v2_091",
+    "wav": "v2_091.wav",
+    "text": "今回ですね、後日ご郵送で新しい端末をお送りしますので、届いたら差し替えをお願いしてたんですよね。",
+    "category": "compound",
+    "verified": true
+  },
+  {
+    "id": "v2_092",
+    "wav": "v2_092.wav",
+    "text": "なりん",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_093",
+    "wav": "v2_093.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_094",
+    "wav": "v2_094.wav",
+    "text": "あ、もしもし。",
+    "category": "greeting",
+    "verified": true
+  },
+  {
+    "id": "v2_095",
+    "wav": "v2_095.wav",
+    "text": "はい、失礼いたします。",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_096",
+    "wav": "v2_096.wav",
+    "text": "sta.da.",
+    "category": "keigo",
+    "verified": true
+  },
+  {
+    "id": "v2_097",
+    "wav": "v2_097.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_098",
+    "wav": "v2_098.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_099",
+    "wav": "v2_099.wav",
+    "text": "",
+    "category": "short",
+    "verified": true
+  },
+  {
+    "id": "v2_100",
+    "wav": "v2_100.wav",
+    "text": "",
+    "category": "compound",
+    "verified": true
+  }
+]

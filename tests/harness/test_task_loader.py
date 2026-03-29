@@ -1,7 +1,6 @@
 """Tests for YAML task definition loading."""
 
 import yaml
-from pathlib import Path
 
 from jaeval.harness.task import load_task
 

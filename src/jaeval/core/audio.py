@@ -69,7 +69,6 @@ def decode_wav_to_float32(audio_bytes: bytes, target_sr: int = 16000):
     """
     import io
 
-    import numpy as np
     import soundfile as sf
 
     audio, sr = sf.read(io.BytesIO(audio_bytes), dtype="float32")

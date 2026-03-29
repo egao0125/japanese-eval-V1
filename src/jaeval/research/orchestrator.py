@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from .planner import ResearchPlanner, ResearchPlan
+from .planner import ResearchPlanner
 from .searcher import ParallelSearcher, SearchResults
 from .reader import DocumentReader
 from .synthesizer import ReportSynthesizer

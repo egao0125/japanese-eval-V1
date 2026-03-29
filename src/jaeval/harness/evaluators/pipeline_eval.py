@@ -21,7 +21,6 @@ Usage::
 from __future__ import annotations
 
 import io
-import struct
 import wave
 from dataclasses import dataclass
 

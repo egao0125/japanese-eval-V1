@@ -14,7 +14,10 @@ from __future__ import annotations
 from pathlib import Path
 
 import typer
+from dotenv import load_dotenv
 from rich.console import Console
+
+load_dotenv()  # Load .env before any provider reads keys
 
 app = typer.Typer(name="jaeval", help="Japanese Evaluation Harness")
 console = Console()
@@ -194,7 +197,7 @@ def research(
         max_repos=max_repos,
         max_models=max_models,
     )
-    console.print(f"\n[green]Research complete![/green]")
+    console.print("\n[green]Research complete![/green]")
 
 
 if __name__ == "__main__":
