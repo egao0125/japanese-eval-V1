@@ -54,7 +54,7 @@ class JudgeConfig:
         ]
     )
     system_prompt: str = ""  # Empty means use DEFAULT_SYSTEM_PROMPT
-    max_tokens: int = 2048
+    max_tokens: int = 4096
     production_ready_threshold: float = 3.5
     min_dimension_score: int = 2
 
