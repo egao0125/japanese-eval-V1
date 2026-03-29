@@ -18,6 +18,12 @@ from jaeval.harness.evaluators.llm_judge import (
     validate_scores,
 )
 
+_has_anthropic = True
+try:
+    import anthropic  # noqa: F401
+except ImportError:
+    _has_anthropic = False
+
 
 # ---------------------------------------------------------------------------
 # extract_json
@@ -374,6 +380,7 @@ class TestLLMJudge:
         assert result.raw_response == "DRY RUN"
         assert result.weighted_score == 0.0
 
+    @pytest.mark.skipif(not _has_anthropic, reason="anthropic not installed")
     @patch("anthropic.Anthropic")
     def test_evaluate_success(self, mock_anthropic_cls):
         mock_client = MagicMock()
@@ -398,6 +405,7 @@ class TestLLMJudge:
         assert "自然さ" in result.biggest_issue
         assert len(result.recommendations) == 2
 
+    @pytest.mark.skipif(not _has_anthropic, reason="anthropic not installed")
     @patch("anthropic.Anthropic")
     def test_evaluate_empty_response(self, mock_anthropic_cls):
         mock_client = MagicMock()
@@ -413,6 +421,7 @@ class TestLLMJudge:
         with pytest.raises(RuntimeError, match="Empty response"):
             judge.evaluate("test")
 
+    @pytest.mark.skipif(not _has_anthropic, reason="anthropic not installed")
     @patch("anthropic.Anthropic")
     def test_evaluate_unparseable_response(self, mock_anthropic_cls):
         mock_client = MagicMock()
