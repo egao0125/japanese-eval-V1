@@ -69,6 +69,31 @@ gates:
   hallucinations: { pass: 0, warn: 2 }
 ```
 
+## Library Integration (Post-Call Auto-Eval)
+
+Use jaeval as a library in your voice AI application:
+
+```python
+from jaeval import evaluate_call
+
+# After a call ends, pass turn data for instant quality scoring
+result = evaluate_call(
+    call_sid="CA001",
+    turns=[
+        {"user_text": "Recoの料金を教えてください", "bot_text": "はい、ご案内します..."},
+        ...
+    ],
+    duration_sec=120.0,
+    run_judge=True,  # Tier 2 LLM judge (requires ANTHROPIC_API_KEY)
+)
+
+print(result.grade)            # "A" (Tier 1 scorecard)
+print(result.weighted_score)   # 4.2 (Tier 2 LLM judge, 1-5 scale)
+print(result.production_ready) # True (weighted_score >= 3.5)
+```
+
+See `examples/post_call_eval.py` for a complete working example.
+
 ## STT Providers
 
 | Provider | Type | GPU | Setup |
@@ -83,6 +108,7 @@ gates:
 
 ```bash
 pip install -e ".[research]"   # Auto-research (anthropic, arxiv)
+pip install -e ".[pipeline]"   # Pipeline eval (numpy, scipy — G.711 codec)
 pip install -e ".[gpu]"        # GPU providers (torch, faster-whisper)
 pip install -e ".[lenient]"    # Lenient CER (fugashi, MeCab)
 pip install -e ".[dev]"        # Dev tools (pytest, ruff, mypy)
@@ -125,7 +151,7 @@ Sources: ArXiv, GitHub, HuggingFace, Brave Web Search. Reports output as structu
 
 ## Tests
 
-112 tests covering core NLP, harness, evaluators, and research modules:
+132 tests covering core NLP, harness, evaluators, pipeline, integration, and research modules:
 
 ```bash
 python -m pytest tests/ -v
