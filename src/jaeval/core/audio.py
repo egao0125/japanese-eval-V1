@@ -62,25 +62,42 @@ def decode_wav_to_float32(audio_bytes: bytes, target_sr: int = 16000):
     Args:
         audio_bytes: Raw WAV file bytes (including header).
         target_sr: Target sample rate in Hz. If the source sample rate
-            differs, the audio will be resampled using librosa.
+            differs, the audio will be resampled.
 
     Returns:
         A 1-D numpy float32 array of audio samples at ``target_sr``.
     """
     import io
 
-    import soundfile as sf
+    import numpy as np
 
-    audio, sr = sf.read(io.BytesIO(audio_bytes), dtype="float32")
+    with wave.open(io.BytesIO(audio_bytes), "rb") as wf:
+        sr = wf.getframerate()
+        n_channels = wf.getnchannels()
+        sample_width = wf.getsampwidth()
+        raw = wf.readframes(wf.getnframes())
+
+    # Decode raw PCM to numpy array
+    if sample_width == 2:
+        audio = np.frombuffer(raw, dtype=np.int16).astype(np.float32) / 32768.0
+    elif sample_width == 4:
+        audio = np.frombuffer(raw, dtype=np.int32).astype(np.float32) / 2147483648.0
+    elif sample_width == 1:
+        audio = (np.frombuffer(raw, dtype=np.uint8).astype(np.float32) - 128.0) / 128.0
+    else:
+        raise ValueError(f"Unsupported sample width: {sample_width}")
 
     # Convert stereo to mono by averaging channels
-    if audio.ndim > 1:
-        audio = audio.mean(axis=1)
+    if n_channels > 1:
+        audio = audio.reshape(-1, n_channels).mean(axis=1)
 
     # Resample if source rate differs from target
     if sr != target_sr:
-        import librosa
+        from math import gcd
 
-        audio = librosa.resample(audio, orig_sr=sr, target_sr=target_sr)
+        from scipy.signal import resample_poly
+
+        g = gcd(target_sr, sr)
+        audio = resample_poly(audio, target_sr // g, sr // g).astype(np.float32)
 
     return audio
