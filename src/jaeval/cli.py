@@ -255,6 +255,75 @@ def research(
         console.print(f"\n[green]Research {i}/{len(topics)} complete![/green]")
 
 
+@app.command()
+def summary(
+    results_dir: Path = typer.Option("results", help="Results directory"),
+    reports_dir: Path = typer.Option("reports", help="Reports directory"),
+) -> None:
+    """Show project overview: benchmarks, evaluations, research reports."""
+    import json as _json
+
+    console.print("[bold]jaeval Project Summary[/bold]\n")
+
+    # STT Benchmarks
+    benchmark_files = sorted(results_dir.glob("*.json")) if results_dir.exists() else []
+    if benchmark_files:
+        console.print(f"[cyan]STT Benchmarks:[/cyan] {len(benchmark_files)} results")
+        for bf in benchmark_files:
+            try:
+                data = _json.loads(bf.read_text())
+                model = data.get("model", "?")
+                task = data.get("task", "?")
+                agg = data.get("aggregate", {})
+                median_cer = agg.get("median_cer", "?")
+                gate = data.get("gate_result", "?")
+                cer_str = f"{median_cer:.1%}" if isinstance(median_cer, float) else str(median_cer)
+                console.print(f"  {bf.name}: {model} / {task} — {cer_str} CER — {gate}")
+            except Exception:
+                console.print(f"  {bf.name}: [red]parse error[/red]")
+    else:
+        console.print("[yellow]No STT benchmarks found.[/yellow]")
+
+    # Judge scores
+    judge_dir = results_dir / "judge_scores"
+    judge_files = sorted(judge_dir.glob("*.json")) if judge_dir.exists() else []
+    if judge_files:
+        console.print(f"\n[cyan]LLM Judge Evaluations:[/cyan] {len(judge_files)} calls")
+        ready_count = 0
+        scores = []
+        for jf in judge_files:
+            try:
+                data = _json.loads(jf.read_text())
+                ws = data.get("weighted_score", 0)
+                ready = data.get("production_ready", False)
+                scores.append(ws)
+                if ready:
+                    ready_count += 1
+                tag = "[green]READY[/green]" if ready else "[red]NOT READY[/red]"
+                console.print(f"  {jf.stem}: {ws}/5 {tag}")
+            except Exception:
+                console.print(f"  {jf.stem}: [red]parse error[/red]")
+        if scores:
+            mean = sum(scores) / len(scores)
+            console.print(f"  Mean: {mean:.2f}/5 | Production Ready: {ready_count}/{len(scores)}")
+    else:
+        console.print("\n[yellow]No LLM judge evaluations found.[/yellow]")
+
+    # Research reports
+    report_files = sorted(reports_dir.glob("*.md")) if reports_dir.exists() else []
+    if report_files:
+        console.print(f"\n[cyan]Research Reports:[/cyan] {len(report_files)} reports")
+        for rf in report_files[-5:]:  # Show last 5
+            console.print(f"  {rf.name}")
+        if len(report_files) > 5:
+            console.print(f"  ... and {len(report_files) - 5} more")
+    else:
+        console.print("\n[yellow]No research reports found.[/yellow]")
+
+    # Test count
+    console.print("")
+
+
 @app.command("judge-compare")
 def judge_compare(
     result_files: list[Path] = typer.Argument(..., help="Judge result JSON files to compare"),
