@@ -1,0 +1,24 @@
+task: stt_corpus_v2_lenient
+type: stt
+version: "1.0"
+description: >
+  Full corpus with Lenient CER enabled. Lenient CER normalizes kanji
+  to hiragana readings before comparison, so 御座います = ございます.
+  Requires fugashi + unidic-lite.
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+
+metrics:
+  - cer
+  - lenient_cer
+  - hallucination_count
+  - latency_p50
+  - latency_p90
+  - rtf
+
+gates:
+  median_cer:
+    pass: 0.05
+    warn: 0.08

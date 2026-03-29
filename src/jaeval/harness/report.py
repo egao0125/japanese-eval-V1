@@ -52,8 +52,9 @@ def _serialize_report(report: BenchmarkReport) -> dict[str, Any]:
             "ref_len": u.cer.ref_len,
             "ref_normalized": u.cer.ref_normalized,
             "hyp_normalized": u.cer.hyp_normalized,
+            "lenient_cer": u.lenient_cer.cer if u.lenient_cer else None,
             "hallucinated_kanji": u.hallucinated_kanji,
-            "hallucinated_count": len(u.hallucinated_kanji),
+            "hallucinated_count": len(u.hallucinated_kanji) if u.hallucinated_kanji else 0,
             "latency_sec": round(u.latency_sec, 4),
             "audio_duration_sec": round(u.audio_duration_sec, 4),
             "rtf": round(u.rtf, 4),
@@ -104,6 +105,9 @@ def format_markdown(report: BenchmarkReport) -> str:
     lines.append(f"| Median CER | {agg.median_cer:.1%} |")
     lines.append(f"| Min / Max CER | {agg.min_cer:.1%} / {agg.max_cer:.1%} |")
     lines.append(f"| Std CER | {agg.std_cer:.1%} |")
+    if agg.mean_lenient_cer is not None:
+        lines.append(f"| Mean Lenient CER | {agg.mean_lenient_cer:.1%} |")
+        lines.append(f"| Median Lenient CER | {agg.median_lenient_cer:.1%} |")
     lines.append(f"| Hallucinations | {agg.total_hallucinations} |")
     lines.append(f"| Latency P50 | {agg.latency_p50:.2f}s |")
     lines.append(f"| Latency P90 | {agg.latency_p90:.2f}s |")

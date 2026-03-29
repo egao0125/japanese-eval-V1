@@ -21,7 +21,7 @@ from typing import Any
 
 from ..core.audio import WavInfo, read_wav_info
 from ..core.hallucination import detect_hallucinated_kanji
-from ..core.metrics import CERResult, compute_cer
+from ..core.metrics import CERResult, compute_cer, compute_lenient_cer
 from .evaluators.pipeline_eval import PipelineEvaluator
 from .gate import GateCheck, evaluate_gates
 from .providers.base import STTProvider
@@ -37,10 +37,11 @@ class UtteranceResult:
     reference: str
     hypothesis: str
     cer: CERResult
-    hallucinated_kanji: list[str]
-    latency_sec: float
-    audio_duration_sec: float
-    rtf: float
+    lenient_cer: CERResult | None = None
+    hallucinated_kanji: list[str] = None
+    latency_sec: float = 0.0
+    audio_duration_sec: float = 0.0
+    rtf: float = 0.0
     skipped: bool = False
     error: str | None = None
 
@@ -60,6 +61,8 @@ class AggregateMetrics:
     latency_mean: float
     rtf_mean: float
     rtf_max: float
+    mean_lenient_cer: float | None = None
+    median_lenient_cer: float | None = None
 
 
 @dataclass
@@ -237,6 +240,9 @@ class BenchmarkRunner:
 
             # Compute metrics
             cer_result = compute_cer(ref_text, result.text)
+            lenient_result = None
+            if "lenient_cer" in self.task.metrics:
+                lenient_result = compute_lenient_cer(ref_text, result.text)
             hallucinated = detect_hallucinated_kanji(ref_text, result.text)
             audio_duration = wav_info.duration_sec
             rtf = result.latency_sec / audio_duration if audio_duration > 0 else 0.0
@@ -247,6 +253,7 @@ class BenchmarkRunner:
                 reference=ref_text,
                 hypothesis=result.text,
                 cer=cer_result,
+                lenient_cer=lenient_result,
                 hallucinated_kanji=hallucinated,
                 latency_sec=result.latency_sec,
                 audio_duration_sec=audio_duration,
@@ -255,8 +262,11 @@ class BenchmarkRunner:
             utterance_results.append(ur)
 
             if verbose:
+                lenient_tag = ""
+                if lenient_result is not None:
+                    lenient_tag = f"  lenient={lenient_result.cer:.1%}"
                 print(
-                    f"  [{entry_id}] CER={cer_result.cer:.1%}  "
+                    f"  [{entry_id}] CER={cer_result.cer:.1%}{lenient_tag}  "
                     f"hall={len(hallucinated)}  "
                     f"lat={result.latency_sec:.2f}s  "
                     f"rtf={rtf:.2f}"
@@ -284,6 +294,11 @@ class BenchmarkRunner:
             p50_idx = int(len(latencies) * 0.5)
             p90_idx = min(int(len(latencies) * 0.9), len(latencies) - 1)
 
+            # Lenient CER aggregates (if computed)
+            lenient_cers = [u.lenient_cer.cer for u in scored if u.lenient_cer is not None]
+            mean_lenient = round(statistics.mean(lenient_cers), 4) if lenient_cers else None
+            median_lenient = round(statistics.median(lenient_cers), 4) if lenient_cers else None
+
             aggregate = AggregateMetrics(
                 mean_cer=round(statistics.mean(cers), 4),
                 median_cer=round(statistics.median(cers), 4),
@@ -296,6 +311,8 @@ class BenchmarkRunner:
                 latency_mean=round(statistics.mean(latencies), 4),
                 rtf_mean=round(statistics.mean(rtfs), 4),
                 rtf_max=round(max(rtfs), 4),
+                mean_lenient_cer=mean_lenient,
+                median_lenient_cer=median_lenient,
             )
 
             # Per-category breakdown
@@ -306,13 +323,17 @@ class BenchmarkRunner:
             for cat, items in sorted(cats.items()):
                 cat_cers = [u.cer.cer for u in items]
                 cat_lats = [u.latency_sec for u in items]
-                per_category[cat] = {
+                cat_info: dict[str, Any] = {
                     "count": len(items),
                     "mean_cer": round(statistics.mean(cat_cers), 4),
                     "median_cer": round(statistics.median(cat_cers), 4),
                     "hallucinations": sum(len(u.hallucinated_kanji) for u in items),
                     "mean_latency": round(statistics.mean(cat_lats), 4),
                 }
+                cat_lenient = [u.lenient_cer.cer for u in items if u.lenient_cer is not None]
+                if cat_lenient:
+                    cat_info["mean_lenient_cer"] = round(statistics.mean(cat_lenient), 4)
+                per_category[cat] = cat_info
 
         # Gate evaluation
         gate_metrics: dict[str, float] = {}
