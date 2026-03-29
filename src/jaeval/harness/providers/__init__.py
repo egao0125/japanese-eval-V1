@@ -32,6 +32,8 @@ MODEL_ALIASES: dict[str, tuple[str, dict]] = {
     "hf-whisper-turbo": ("hf-inference", {"model_id": "openai/whisper-large-v3-turbo"}),
     "hf-kotoba": ("hf-inference", {"model_id": "kotoba-tech/kotoba-whisper-v2.0"}),
     "hf-qwen3-asr": ("hf-inference", {"model_id": "Qwen/Qwen3-ASR-0.6B"}),
+    "hf-granite-speech": ("hf-inference", {"model_id": "ibm-granite/granite-4.0-1b-speech"}),
+    "hf-cohere-transcribe": ("hf-inference", {"model_id": "CohereLabs/cohere-transcribe-03-2026"}),
 }
 
 

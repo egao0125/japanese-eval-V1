@@ -15,6 +15,12 @@ Run `scripts/benchmark_candidates.sh` on RunPod A40. Candidates:
 | Kotoba-Whisper v2.0 | 756M | `kotoba-tech/kotoba-whisper-v2.0-faster` | Pre-trained on 7.2M Japanese clips |
 | Qwen3-ASR-0.6B | 600M | `Qwen/Qwen3-ASR-0.6B` | Newest SOTA, streaming, Apache-2.0 |
 | Qwen3-ASR-1.7B | 1.7B | `Qwen/Qwen3-ASR-1.7B` | Best Fleurs CER (5.2%) |
+| IBM Granite 4.0 1B Speech | 1B | `ibm-granite/granite-4.0-1b-speech` | 16,700h JP data, keyword biasing, fine-tune notebook, #1 OpenASR |
+| Cohere Transcribe | 2B | `CohereLabs/cohere-transcribe-03-2026` | #1 HF ASR leaderboard (WER 5.42), 0.5M hours training, Fast-Conformer |
+| NVIDIA Parakeet-TDT/CTC-0.6B-ja | 600M | `nvidia/parakeet-tdt_ctc-0.6b-ja` | Best raw Japanese CER (6.4% JSUT), NeMo native |
+
+**Eliminated candidates:**
+- Microsoft VibeVoice ASR (9B params) — too large for A40 LoRA fine-tuning
 
 **Selection criteria (in order):**
 1. Lowest median CER on telephony corpus v2 (zero-shot)
@@ -106,6 +112,33 @@ For Qwen3-ASR:
 # Uses Qwen's own training recipe
 pip install qwen-asr peft
 # Follow: https://huggingface.co/Qwen/Qwen3-ASR-0.6B#fine-tuning
+```
+
+For IBM Granite 4.0 1B Speech:
+```bash
+# Official fine-tune notebook: https://github.com/ibm-granite/granite-speech
+pip install granite-speech transformers peft datasets accelerate
+# Conformer encoder + Granite-4.0-1b decoder — LoRA targets decoder layers
+# Keyword biasing: supply domain terms ("レコ", "StepAI") via prompt context
+python scripts/train/train_granite_lora.py \
+  --model_id ibm-granite/granite-4.0-1b-speech \
+  --dataset_path /workspace/data/train \
+  --output_dir /workspace/checkpoints/granite-ja-v1 \
+  --lora_r 64 --lora_alpha 128 \
+  --epochs 3 --batch_size 8
+```
+
+For Cohere Transcribe:
+```bash
+# Fast-Conformer X-attention encoder-decoder, 2B params
+# Apache-2.0, standard HF Transformers PEFT workflow
+pip install transformers peft datasets accelerate
+python scripts/train/train_cohere_lora.py \
+  --model_id CohereLabs/cohere-transcribe-03-2026 \
+  --dataset_path /workspace/data/train \
+  --output_dir /workspace/checkpoints/cohere-ja-v1 \
+  --lora_r 64 --lora_alpha 128 \
+  --epochs 3 --batch_size 4  # 2B params — reduce batch for A40
 ```
 
 ## Phase 4: Evaluation Loop
