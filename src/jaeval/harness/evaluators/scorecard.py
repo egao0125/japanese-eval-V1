@@ -89,6 +89,7 @@ class ScorecardMetrics:
     overall_grade: str = "C"  # "A" | "B" | "C" | "D" | "F"
     turns: list[dict[str, Any]] = field(default_factory=list)
     call_outcome: str = "unknown"
+    stt_errors_by_type: dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize to a plain dict (JSON-safe)."""
@@ -103,6 +104,7 @@ class ScorecardMetrics:
             "banned_words_used": self.banned_words_used,
             "overall_grade": self.overall_grade,
             "call_outcome": self.call_outcome,
+            "stt_errors_by_type": self.stt_errors_by_type,
             "turns": self.turns,
         }
 
@@ -234,13 +236,20 @@ def build_scorecard(
     all_banned: list[str] = []
     latencies: list[float] = []
 
+    stt_errors_by_type: dict[str, int] = {
+        "GARBLED_RECOVERED": 0,
+        "NEEDS_REVIEW": 0,
+        "REPEAT_REQUEST": 0,
+    }
+
     for turn in turns:
         classification = _classify_turn(turn)
         bot_text = turn.get("bot_text", "")
 
-        # Count STT errors
-        if classification in ("GARBLED_RECOVERED", "NEEDS_REVIEW", "REPEAT_REQUEST"):
+        # Count STT errors by type
+        if classification in stt_errors_by_type:
             stt_error_count += 1
+            stt_errors_by_type[classification] += 1
 
         # Detect hallucinations
         hallucination_count += _detect_hallucinations(bot_text)
@@ -283,6 +292,7 @@ def build_scorecard(
         avg_latency_sec=avg_latency,
         banned_words_used=unique_banned,
         turns=classified_turns,
+        stt_errors_by_type=stt_errors_by_type,
     )
 
     metrics.overall_grade = grade_call(metrics)
@@ -298,6 +308,11 @@ def grade_call(metrics: ScorecardMetrics) -> str:
         C: Moderate issues (some STT errors, partial completion)
         D: Significant issues (many errors, banned words, or hallucinations)
         F: Critical failure (task failed, or hallucinations + banned words)
+
+    STT errors are weighted by severity:
+        GARBLED_RECOVERED: -2 (system handled it successfully)
+        REPEAT_REQUEST:    -5 (user had to repeat)
+        NEEDS_REVIEW:      -8 (potential wrong info delivered)
     """
     # Automatic F conditions
     if metrics.task_completion == "failed" and metrics.hallucination_count > 0:
@@ -314,8 +329,15 @@ def grade_call(metrics: ScorecardMetrics) -> str:
     # Score-based grading
     score = 100
 
-    # STT errors: -5 per error
-    score -= metrics.stt_error_count * 5
+    # STT errors: weighted by severity
+    by_type = metrics.stt_errors_by_type
+    if by_type:
+        score -= by_type.get("GARBLED_RECOVERED", 0) * 2
+        score -= by_type.get("REPEAT_REQUEST", 0) * 5
+        score -= by_type.get("NEEDS_REVIEW", 0) * 8
+    else:
+        # Fallback for metrics without type breakdown
+        score -= metrics.stt_error_count * 5
 
     # Banned words: -15 per word
     score -= len(metrics.banned_words_used) * 15
@@ -329,11 +351,11 @@ def grade_call(metrics: ScorecardMetrics) -> str:
     elif metrics.task_completion == "failed":
         score -= 30
 
-    # Latency penalty (>2s average is concerning)
-    if metrics.avg_latency_sec > 2.0:
-        score -= 10
-    elif metrics.avg_latency_sec > 3.0:
+    # Latency penalty
+    if metrics.avg_latency_sec > 3.0:
         score -= 20
+    elif metrics.avg_latency_sec > 2.0:
+        score -= 10
 
     if score >= 90:
         return "A"

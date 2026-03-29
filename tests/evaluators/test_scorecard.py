@@ -247,5 +247,92 @@ class TestGradeCall:
             hallucination_count=0,
             avg_latency_sec=1.0,
         )
-        # score = 100 - 15 (3 errors) - 10 (partial) = 75 → B
+        # Fallback: score = 100 - 15 (3 errors * 5) - 10 (partial) = 75 → B
         assert grade_call(metrics) == "B"
+
+    def test_severity_garbled_recovered_low_penalty(self):
+        """GARBLED_RECOVERED costs only -2 per, so 5 garbles = -10 → grade A."""
+        metrics = ScorecardMetrics(
+            call_sid="sev1",
+            duration_sec=120,
+            turn_count=10,
+            task_completion="completed",
+            stt_error_count=5,
+            hallucination_count=0,
+            avg_latency_sec=0.8,
+            stt_errors_by_type={"GARBLED_RECOVERED": 5, "NEEDS_REVIEW": 0, "REPEAT_REQUEST": 0},
+        )
+        # score = 100 - (5 * 2) = 90 → A
+        assert grade_call(metrics) == "A"
+
+    def test_severity_repeat_request_medium_penalty(self):
+        """REPEAT_REQUEST costs -5 per."""
+        metrics = ScorecardMetrics(
+            call_sid="sev2",
+            duration_sec=120,
+            turn_count=10,
+            task_completion="completed",
+            stt_error_count=3,
+            hallucination_count=0,
+            avg_latency_sec=0.8,
+            stt_errors_by_type={"GARBLED_RECOVERED": 0, "NEEDS_REVIEW": 0, "REPEAT_REQUEST": 3},
+        )
+        # score = 100 - (3 * 5) = 85 → B
+        assert grade_call(metrics) == "B"
+
+    def test_severity_needs_review_high_penalty(self):
+        """NEEDS_REVIEW costs -8 per."""
+        metrics = ScorecardMetrics(
+            call_sid="sev3",
+            duration_sec=120,
+            turn_count=10,
+            task_completion="completed",
+            stt_error_count=3,
+            hallucination_count=0,
+            avg_latency_sec=0.8,
+            stt_errors_by_type={"GARBLED_RECOVERED": 0, "NEEDS_REVIEW": 3, "REPEAT_REQUEST": 0},
+        )
+        # score = 100 - (3 * 8) = 76 → B
+        assert grade_call(metrics) == "B"
+
+    def test_severity_mixed_real_call_pattern(self):
+        """Simulates CAe454b: 8 garble + 5 repeat + 2 needs_review = -41 → D."""
+        metrics = ScorecardMetrics(
+            call_sid="sev4",
+            duration_sec=300,
+            turn_count=22,
+            task_completion="completed",
+            stt_error_count=15,
+            hallucination_count=0,
+            avg_latency_sec=1.2,
+            stt_errors_by_type={"GARBLED_RECOVERED": 8, "NEEDS_REVIEW": 2, "REPEAT_REQUEST": 5},
+        )
+        # score = 100 - (8*2 + 5*5 + 2*8) = 100 - 57 = 43 → D
+        assert grade_call(metrics) == "D"
+
+    def test_latency_over_3s_penalty(self):
+        """Latency > 3s should give -20 (not unreachable)."""
+        metrics = ScorecardMetrics(
+            call_sid="lat",
+            duration_sec=60,
+            turn_count=3,
+            task_completion="completed",
+            stt_error_count=0,
+            hallucination_count=0,
+            avg_latency_sec=3.5,
+        )
+        # score = 100 - 20 (latency > 3s) = 80 → B
+        assert grade_call(metrics) == "B"
+
+    def test_build_scorecard_populates_errors_by_type(self):
+        """build_scorecard should populate stt_errors_by_type."""
+        turns = [
+            {"user_text": "テスト", "bot_text": "もう一度お願いできますか", "confidence": 0.5, "latency_ms": 500},
+            {"user_text": "カデニン", "bot_text": "架電ですね", "confidence": -0.20, "has_uncertainty": True, "latency_ms": 700},
+            {"user_text": "???", "bot_text": "はい", "confidence": -0.30, "has_uncertainty": True, "latency_ms": 600},
+        ]
+        sc = build_scorecard("TYPES", turns, duration_sec=60.0)
+        assert sc.stt_errors_by_type["REPEAT_REQUEST"] == 1
+        assert sc.stt_errors_by_type["GARBLED_RECOVERED"] == 1
+        assert sc.stt_errors_by_type["NEEDS_REVIEW"] == 1
+        assert sc.stt_error_count == 3
