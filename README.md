@@ -88,10 +88,47 @@ pip install -e ".[lenient]"    # Lenient CER (fugashi, MeCab)
 pip install -e ".[dev]"        # Dev tools (pytest, ruff, mypy)
 ```
 
-## Tests
+## Conversation Evaluation
+
+Three-tier evaluation for voice agent call quality:
+
+| Tier | Module | Description |
+|------|--------|-------------|
+| 1 | `scorecard` | Automated metrics: turn classification, banned words, hallucinations, grading (A-F) |
+| 2 | `llm_judge` | LLM-as-judge with 6 configurable dimensions (1-5 scale), YAML-driven weights |
+| 3 | Human rubric | Manual evaluation (framework only) |
 
 ```bash
-pytest tests/ -v
+# Evaluate a call scorecard with LLM judge
+jaeval judge --scorecard results/scorecards/call.json
+
+# Evaluate raw transcript text
+jaeval judge --transcript "BOT: お電話ありがとうございます..."
+
+# Custom judge config
+jaeval judge --scorecard call.json --judge-config tasks/conversation/llm_judge_6dim.yaml
+```
+
+## Auto-Research
+
+Agent-driven pipeline that discovers papers, models, and benchmarks:
+
+```bash
+# Single topic
+jaeval research "Japanese ASR evaluation benchmarks 2024-2025"
+
+# Batch research from file (one topic per line)
+jaeval research --topics-file topics/default_research_topics.txt
+```
+
+Sources: ArXiv, GitHub, HuggingFace, Brave Web Search. Reports output as structured Markdown with citations.
+
+## Tests
+
+112 tests covering core NLP, harness, evaluators, and research modules:
+
+```bash
+python -m pytest tests/ -v
 ```
 
 ## Key Metrics
