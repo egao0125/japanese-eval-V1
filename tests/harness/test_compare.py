@@ -1,7 +1,5 @@
 """Test benchmark comparison report generation."""
 import json
-import tempfile
-from pathlib import Path
 
 from jaeval.harness.compare import format_comparison_markdown, load_results
 
