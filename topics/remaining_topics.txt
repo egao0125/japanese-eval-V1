@@ -1,0 +1,4 @@
+# Remaining topics not yet researched
+Japanese TTS evaluation: naturalness, prosody, MOS scoring for business telephony
+Voice agent evaluation frameworks: VoiceAgentBench, Hamming AI, end-to-end testing
+Auto-research systems: STORM, GPT-Researcher, agent-driven knowledge curation
