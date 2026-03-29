@@ -8,7 +8,7 @@ description: >
 
 judge:
   model: claude-sonnet-4-20250514
-  max_tokens: 2048
+  max_tokens: 4096
   dimensions:
     task_completion: 0.30
     natural_flow: 0.20
