@@ -196,25 +196,46 @@ def compare(
 
 @app.command()
 def research(
-    topic: str = typer.Argument("Japanese voice AI evaluation state of the art"),
+    topic: str = typer.Argument(None, help="Research topic (or use --topics-file)"),
+    topics_file: Path = typer.Option(None, "--topics-file", help="File with one topic per line"),
     model: str = typer.Option("claude-sonnet-4-20250514", help="LLM model for planning/synthesis"),
     output_dir: Path = typer.Option("reports", help="Output directory for reports"),
     max_papers: int = typer.Option(10, help="Max papers to summarize"),
     max_repos: int = typer.Option(5, help="Max repos to summarize"),
     max_models: int = typer.Option(5, help="Max HF models to summarize"),
 ) -> None:
-    """Run auto-research pipeline on a topic."""
+    """Run auto-research pipeline on a topic (or batch of topics from file)."""
     from .research import run_research as _run_research
 
-    _run_research(
-        topic,
-        model=model,
-        output_dir=output_dir,
-        max_papers=max_papers,
-        max_repos=max_repos,
-        max_models=max_models,
-    )
-    console.print("\n[green]Research complete![/green]")
+    topics: list[str] = []
+    if topics_file:
+        if not topics_file.exists():
+            console.print(f"[red]Topics file not found: {topics_file}[/red]")
+            raise typer.Exit(1)
+        topics = [
+            line.strip()
+            for line in topics_file.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
+    elif topic:
+        topics = [topic]
+    else:
+        topics = ["Japanese voice AI evaluation state of the art"]
+
+    for i, t in enumerate(topics, 1):
+        if len(topics) > 1:
+            console.print(f"\n[bold]--- Research {i}/{len(topics)} ---[/bold]")
+        console.print(f"[cyan]Topic:[/cyan] {t}\n")
+
+        _run_research(
+            t,
+            model=model,
+            output_dir=output_dir,
+            max_papers=max_papers,
+            max_repos=max_repos,
+            max_models=max_models,
+        )
+        console.print(f"\n[green]Research {i}/{len(topics)} complete![/green]")
 
 
 if __name__ == "__main__":

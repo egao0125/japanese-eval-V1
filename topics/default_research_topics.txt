@@ -1,0 +1,9 @@
+# Default research topics for Japanese voice AI evaluation
+# One topic per line. Lines starting with # are ignored.
+
+Japanese ASR evaluation benchmarks: CER metrics, ReazonSpeech, and model comparison 2024-2025
+Japanese telephony speech recognition: real-time ASR, noise robustness, keigo detection
+LLM-as-judge for voice agent conversation quality: automated scoring and multi-dimensional rubrics
+Japanese TTS evaluation: naturalness, prosody, MOS scoring for business telephony
+Voice agent evaluation frameworks: VoiceAgentBench, Hamming AI, end-to-end testing
+Auto-research systems: STORM, GPT-Researcher, agent-driven knowledge curation
