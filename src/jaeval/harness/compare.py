@@ -66,12 +66,21 @@ def format_comparison_markdown(result_files: list[Path]) -> str:
 
     # Collect aggregates for best-of detection
     entries: list[dict[str, Any]] = []
+
+    # Use "task/model" label when multiple tasks are present
+    tasks_seen = {data.get("task", "") for data in results}
+    use_task_prefix = len(tasks_seen) > 1
+
     for data in results:
         agg = data.get("aggregate")
         if not agg:
             continue
+        model_label = data.get("model", "?")
+        if use_task_prefix:
+            task_name = data.get("task", "")
+            model_label = f"{model_label} ({task_name})"
         entries.append({
-            "model": data.get("model", "?"),
+            "model": model_label,
             "timestamp": data.get("timestamp", "")[:10],
             "mean_cer": agg.get("mean_cer", 0),
             "median_cer": agg.get("median_cer", 0),
@@ -123,10 +132,13 @@ def format_comparison_markdown(result_files: list[Path]) -> str:
     model_cats: dict[str, dict[str, float]] = {}
 
     for data in results:
-        model = data.get("model", "?")
+        model_label = data.get("model", "?")
+        if use_task_prefix:
+            task_name = data.get("task", "")
+            model_label = f"{model_label} ({task_name})"
         for cat, info in data.get("per_category", {}).items():
             all_cats.add(cat)
-            model_cats.setdefault(model, {})[cat] = info.get("mean_cer", 0)
+            model_cats.setdefault(model_label, {})[cat] = info.get("mean_cer", 0)
 
     if all_cats and model_cats:
         models = list(model_cats.keys())

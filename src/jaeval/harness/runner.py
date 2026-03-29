@@ -22,6 +22,7 @@ from typing import Any
 from ..core.audio import WavInfo, read_wav_info
 from ..core.hallucination import detect_hallucinated_kanji
 from ..core.metrics import CERResult, compute_cer
+from .evaluators.pipeline_eval import PipelineEvaluator
 from .gate import GateCheck, evaluate_gates
 from .providers.base import STTProvider
 from .task import TaskConfig
@@ -142,6 +143,7 @@ class BenchmarkRunner:
             ground_truth = ground_truth[:limit]
 
         corpus_dir = self.corpus_base / self.task.corpus.path
+        pipeline = PipelineEvaluator(self.task.pipeline)
         self.provider.setup()
 
         utterance_results: list[UtteranceResult] = []
@@ -174,11 +176,38 @@ class BenchmarkRunner:
                     print(f"  [{entry_id}] SKIP -- {wav_name} not found")
                 continue
 
-            # Transcribe
+            # Load audio and apply pipeline processing
             try:
                 wav_info: WavInfo = read_wav_info(wav_path)
                 audio_bytes = wav_path.read_bytes()
-                result = self.provider.transcribe(audio_bytes, wav_info.sample_rate)
+
+                # Apply pipeline transformations (G.711 codec, energy gate)
+                processed_audio, pipe_stats = pipeline.process_audio(
+                    audio_bytes, wav_info.sample_rate
+                )
+                if not pipe_stats.energy_gate_passed:
+                    utterance_results.append(
+                        UtteranceResult(
+                            id=entry_id,
+                            category=category,
+                            reference=ref_text,
+                            hypothesis="",
+                            cer=_EMPTY_CER,
+                            hallucinated_kanji=[],
+                            latency_sec=0.0,
+                            audio_duration_sec=wav_info.duration_sec,
+                            rtf=0.0,
+                            skipped=True,
+                            error=f"energy_gate: RMS {pipe_stats.energy_rms:.4f} < {self.task.pipeline.energy_gate_rms}",
+                        )
+                    )
+                    if verbose:
+                        print(
+                            f"  [{entry_id}] GATE -- RMS {pipe_stats.energy_rms:.4f}"
+                        )
+                    continue
+
+                result = self.provider.transcribe(processed_audio, wav_info.sample_rate)
             except Exception as e:
                 utterance_results.append(
                     UtteranceResult(

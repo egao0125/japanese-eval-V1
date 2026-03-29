@@ -23,6 +23,19 @@ app = typer.Typer(name="jaeval", help="Japanese Evaluation Harness")
 console = Console()
 
 
+def _parse_provider_args(raw: list[str] | None) -> dict[str, str]:
+    """Parse key=value provider arguments into a dict."""
+    if not raw:
+        return {}
+    result = {}
+    for item in raw:
+        if "=" not in item:
+            raise typer.BadParameter(f"Expected key=value format, got: {item}")
+        k, v = item.split("=", 1)
+        result[k.strip()] = v.strip()
+    return result
+
+
 @app.command()
 def benchmark(
     task: str = typer.Argument(..., help="Path to task YAML file"),
@@ -30,6 +43,9 @@ def benchmark(
     limit: int = typer.Option(0, help="Limit utterances (0=all)"),
     output: Path = typer.Option(None, help="Output JSON path"),
     verbose: bool = typer.Option(True, help="Print per-utterance results"),
+    provider_arg: list[str] = typer.Option(
+        None, "--provider-arg", help="Provider kwargs as key=value (repeatable)"
+    ),
 ) -> None:
     """Run an STT benchmark task against a model provider."""
     from .harness.task import load_task
@@ -38,6 +54,7 @@ def benchmark(
     from .harness.report import format_markdown, save_json
 
     task_config = load_task(Path(task))
+    kwargs = _parse_provider_args(provider_arg)
 
     providers_to_run: list[str]
     if model == "all":
@@ -46,7 +63,7 @@ def benchmark(
         providers_to_run = [model]
 
     for provider_name in providers_to_run:
-        provider = get_provider(provider_name)
+        provider = get_provider(provider_name, **kwargs)
         runner = BenchmarkRunner(task_config, provider)
         report = runner.run(limit=limit, verbose=verbose)
 

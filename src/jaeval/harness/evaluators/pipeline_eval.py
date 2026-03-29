@@ -133,9 +133,13 @@ class PipelineEvaluator:
 
         # Resample to 8000 Hz for telephony codec simulation
         if sample_rate != 8000:
-            import librosa
+            from scipy.signal import resample_poly
+            from math import gcd
 
-            audio = librosa.resample(audio, orig_sr=sample_rate, target_sr=8000)
+            down = sample_rate
+            up = 8000
+            g = gcd(up, down)
+            audio = resample_poly(audio, up // g, down // g).astype(np.float32)
             sample_rate = 8000
 
         # Float32 [-1, 1] -> int16
@@ -156,11 +160,13 @@ class PipelineEvaluator:
 
         # Resample back to original rate if needed
         if sample_rate != original_sr:
-            import librosa
+            from scipy.signal import resample_poly
+            from math import gcd
 
-            decoded_float = librosa.resample(
-                decoded_float, orig_sr=sample_rate, target_sr=original_sr
-            )
+            down = sample_rate
+            up = original_sr
+            g = gcd(up, down)
+            decoded_float = resample_poly(decoded_float, up // g, down // g).astype(np.float32)
             sample_rate = original_sr
 
         # Re-encode as WAV bytes
