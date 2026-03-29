@@ -255,6 +255,72 @@ def research(
         console.print(f"\n[green]Research {i}/{len(topics)} complete![/green]")
 
 
+@app.command("judge-compare")
+def judge_compare(
+    result_files: list[Path] = typer.Argument(..., help="Judge result JSON files to compare"),
+    output: Path = typer.Option(None, help="Output markdown path"),
+) -> None:
+    """Compare LLM judge results across multiple calls."""
+    import json as _json
+
+    results = []
+    for f in result_files:
+        try:
+            with open(f, "r", encoding="utf-8") as fp:
+                data = _json.load(fp)
+            data["_filename"] = f.stem
+            results.append(data)
+        except (OSError, _json.JSONDecodeError) as e:
+            console.print(f"[yellow]Skipping {f}: {e}[/yellow]")
+
+    if not results:
+        console.print("[red]No valid result files found.[/red]")
+        raise typer.Exit(1)
+
+    # Collect all dimension names
+    all_dims: list[str] = []
+    for r in results:
+        for dim in r.get("scores", {}):
+            if dim not in all_dims:
+                all_dims.append(dim)
+
+    # Header
+    lines = ["## LLM Judge Comparison", ""]
+    dim_headers = " | ".join(d[:12] for d in all_dims)
+    header = f"| Call | Score | Ready | {dim_headers} |"
+    sep = "|------|------:|:-----:|" + "|".join(["-----:" for _ in all_dims]) + "|"
+    lines.append(header)
+    lines.append(sep)
+
+    for r in results:
+        call_id = r.get("_filename", "?")
+        ws = r.get("weighted_score", 0)
+        ready = "Yes" if r.get("production_ready") else "No"
+        dim_vals = []
+        for d in all_dims:
+            score = r.get("scores", {}).get(d, {}).get("score", "-")
+            dim_vals.append(str(score))
+        dim_str = " | ".join(dim_vals)
+        lines.append(f"| {call_id} | {ws} | {ready} | {dim_str} |")
+
+    lines.append("")
+
+    # Summary stats
+    scores = [r.get("weighted_score", 0) for r in results]
+    ready_count = sum(1 for r in results if r.get("production_ready"))
+    lines.append(f"**Mean Score:** {sum(scores)/len(scores):.2f}")
+    lines.append(f"**Production Ready:** {ready_count}/{len(results)}")
+    lines.append("")
+
+    md = "\n".join(lines)
+    console.print(md)
+
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(md, encoding="utf-8")
+        console.print(f"\nComparison saved to {output}")
+
+
 @app.command("eval")
 def eval_call(
     call_json: Path = typer.Argument(..., help="Path to call JSON with turns array"),
