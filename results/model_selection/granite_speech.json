@@ -1,0 +1,910 @@
+{
+  "model": "ibm-granite/granite-4.0-1b-speech",
+  "median_cer": 0.2727,
+  "mean_cer": 0.427525,
+  "hallucinations": 25,
+  "scored": 100,
+  "latency_p50": 0.6297853281721473,
+  "results": [
+    {
+      "id": "v2_001",
+      "category": "keigo",
+      "cer": 0.125,
+      "hallucinations": 0,
+      "latency": 1.0108324699103832,
+      "hypothesis": "そうなんですよ",
+      "reference": "そうなんですよ。"
+    },
+    {
+      "id": "v2_002",
+      "category": "keigo",
+      "cer": 0.1667,
+      "hallucinations": 0,
+      "latency": 0.46909791976213455,
+      "hypothesis": "はいお願いいたします",
+      "reference": "はい、お願いいたします。"
+    },
+    {
+      "id": "v2_003",
+      "category": "compound",
+      "cer": 0.122,
+      "hallucinations": 0,
+      "latency": 1.632446059025824,
+      "hypothesis": "新しいものに変えられるって方がやっぱりいらっしゃるんですよ特に授業されている方は",
+      "reference": "新しいものに変えられるって方がやっぱりいらっしゃるんですね、特に事業されてる方は。"
+    },
+    {
+      "id": "v2_004",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.1066609276458621,
+      "hypothesis": "",
+      "reference": ""
+    },
+    {
+      "id": "v2_005",
+      "category": "proper_noun",
+      "cer": 0.2545,
+      "hallucinations": 0,
+      "latency": 1.5712284855544567,
+      "hypothesis": "お世話になっております私以前事業用wifiを取り次ぎを担当しておりましたitパートナーの水野と申しまして",
+      "reference": "お世話になっております。私以前事業用Wi-Fiの取次を担当しておりました、ITパートナーのみずのと申しまして。"
+    },
+    {
+      "id": "v2_006",
+      "category": "number",
+      "cer": 0.2391,
+      "hallucinations": 0,
+      "latency": 1.1958817392587662,
+      "hypothesis": "分かりましたもし繋がらなかったらまた後日の10時頃ご連絡させていただいて",
+      "reference": "あ、わかりました。もし繋がらなかったらまたちょっと後日の10時頃一度ご連絡させていただいて。"
+    },
+    {
+      "id": "v2_007",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.11276078782975674,
+      "hypothesis": "",
+      "reference": "はい。"
+    },
+    {
+      "id": "v2_008",
+      "category": "proper_noun",
+      "cer": 0.2206,
+      "hallucinations": 1,
+      "latency": 2.3842909168452024,
+      "hypothesis": "現在ご利用いただいております事業用wifiルーターの更新の件での連絡だったんですが徹ご担当者様お助けでしたでしょうか",
+      "reference": "はい、現在ご利用いただいております事業用Wi-Fiルーターの更新の件でのご連絡だったんですが、実はご担当者様はお手すきでしたでしょうか。"
+    },
+    {
+      "id": "v2_009",
+      "category": "greeting",
+      "cer": 0.1667,
+      "hallucinations": 0,
+      "latency": 0.26444489415735006,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし"
+    },
+    {
+      "id": "v2_010",
+      "category": "proper_noun",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.26571262814104557,
+      "hypothesis": "tobacco stick",
+      "reference": ""
+    },
+    {
+      "id": "v2_011",
+      "category": "proper_noun",
+      "cer": 0.098,
+      "hallucinations": 0,
+      "latency": 1.896533191204071,
+      "hypothesis": "最新型の端末で無償での交換で終わったのでいいということでサポートのご連絡をさせていただいたんですよね",
+      "reference": "最新型の端末で無料での交換で終わったので、ということでサポートのご連絡をさせていただいてたんですよね。"
+    },
+    {
+      "id": "v2_012",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.16000148188322783,
+      "hypothesis": "i",
+      "reference": ""
+    },
+    {
+      "id": "v2_013",
+      "category": "number",
+      "cer": 0.2963,
+      "hallucinations": 0,
+      "latency": 1.6441950872540474,
+      "hypothesis": "他のはいすいませんちょっとお時間いただいてありがとうございましたえっさあではまた何かありましたらはいよろしくお願い致します",
+      "reference": "すいません、ちょっとお時間いただいてありがとうございました。また何かありましたら、よろしくお願いいたします。"
+    },
+    {
+      "id": "v2_014",
+      "category": "number",
+      "cer": 0.4286,
+      "hallucinations": 1,
+      "latency": 0.6693084239959717,
+      "hypothesis": "白い比較15cmから20cmぐらいの",
+      "reference": "白い四角い15センチから20センチぐらいの"
+    },
+    {
+      "id": "v2_015",
+      "category": "proper_noun",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.14294917974621058,
+      "hypothesis": "",
+      "reference": ""
+    },
+    {
+      "id": "v2_016",
+      "category": "keigo",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.8913669595494866,
+      "hypothesis": "明るましゃすいませんであればご不要ご連絡でした",
+      "reference": "わかりました、すいません、であればご不要なご連絡でした。"
+    },
+    {
+      "id": "v2_017",
+      "category": "keigo",
+      "cer": 0.3125,
+      "hallucinations": 5,
+      "latency": 1.199358094483614,
+      "hypothesis": "交換いただく玉松だったんですが白い調べたい玉松になりまして",
+      "reference": "公開いただく端末だったんですが、白い平べったい端末になりまして、"
+    },
+    {
+      "id": "v2_018",
+      "category": "compound",
+      "cer": 0.125,
+      "hallucinations": 0,
+      "latency": 1.592844719067216,
+      "hypothesis": "ただwifiとかも例えばお客様とかだけに何か提供されているだけとかそんな使ってないよとかっていうのであれば",
+      "reference": "ただWi-Fiとかも、例えばお客様とかだけに何か提供されてるだけとか、そんな使ってないよとかっていうのであれば。"
+    },
+    {
+      "id": "v2_019",
+      "category": "proper_noun",
+      "cer": 0.2143,
+      "hallucinations": 0,
+      "latency": 0.4751263139769435,
+      "hypothesis": "アートなーの水野と申します",
+      "reference": "パートナーの水野と申します。"
+    },
+    {
+      "id": "v2_020",
+      "category": "keigo",
+      "cer": 0.1458,
+      "hallucinations": 1,
+      "latency": 1.588011223822832,
+      "hypothesis": "後日、ご輸送で新しい端末をお送りいたしますので、届きましたら差し替えをお願いしております。",
+      "reference": "はい、後日ご郵送で新しい端末をお送りいたしますので、届きましたら差し替えをお願いしておりまして。"
+    },
+    {
+      "id": "v2_021",
+      "category": "keigo",
+      "cer": 0.1667,
+      "hallucinations": 0,
+      "latency": 0.40213578194379807,
+      "hypothesis": "はいお願いいたします",
+      "reference": "はい、お願いいたします。"
+    },
+    {
+      "id": "v2_022",
+      "category": "greeting",
+      "cer": 0.1875,
+      "hallucinations": 1,
+      "latency": 1.2548388661816716,
+      "hypothesis": "お世話になっております植草竹内様では間違いなかったでしょうか",
+      "reference": "お世話になっております。野口様竹内様で間違いなかったでしょうか。"
+    },
+    {
+      "id": "v2_023",
+      "category": "keigo",
+      "cer": 0.7222,
+      "hallucinations": 0,
+      "latency": 1.090093456208706,
+      "hypothesis": "食いましたやればあの一応強制とかではなかったのですいませんが",
+      "reference": "やれば一応強制とかではなかったので。"
+    },
+    {
+      "id": "v2_024",
+      "category": "short",
+      "cer": 2.3333,
+      "hallucinations": 0,
+      "latency": 0.22510524187237024,
+      "hypothesis": "you s- s-",
+      "reference": "失礼。"
+    },
+    {
+      "id": "v2_025",
+      "category": "compound",
+      "cer": 0.35,
+      "hallucinations": 3,
+      "latency": 1.857127433642745,
+      "hypothesis": "なので今も切り替えられているご概要でしたので私今回花ちょっと不要なボレーなことになってしまってましたので",
+      "reference": "なので今もう切り替えられてる具合ようでしたので、実は私今回こうね、ちょっとこう不要な誤りなくとなってしまってましたので。"
+    },
+    {
+      "id": "v2_026",
+      "category": "keigo",
+      "cer": 0.0833,
+      "hallucinations": 0,
+      "latency": 1.0859919721260667,
+      "hypothesis": "よろしければ私の方から折り返しさせていただければと思うんですけども",
+      "reference": "もしよろしければ私の方から折り返しさせていただければと思うんですけども。"
+    },
+    {
+      "id": "v2_027",
+      "category": "compound",
+      "cer": 0.1463,
+      "hallucinations": 0,
+      "latency": 1.3068755436688662,
+      "hypothesis": "あそうだったんですねかしこうまい本日はもうお戻りとかにはならなかったですかね",
+      "reference": "あ、そうだったんですね、かしこま。本日はもうお戻りとかにはなられなかったですかね?"
+    },
+    {
+      "id": "v2_028",
+      "category": "greeting",
+      "cer": 0.4,
+      "hallucinations": 0,
+      "latency": 0.2268422544002533,
+      "hypothesis": "あもしもし",
+      "reference": "もしもし。"
+    },
+    {
+      "id": "v2_029",
+      "category": "compound",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 2.0375741301104426,
+      "hypothesis": "あっチェカーのあったんじょうさまの声毎回エスターのたまっしく立議してもして何ちょっと組織も終了があった",
+      "reference": ""
+    },
+    {
+      "id": "v2_030",
+      "category": "keigo",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.7573041180148721,
+      "hypothesis": "ああそうだったんですね友情終わりよ",
+      "reference": ""
+    },
+    {
+      "id": "v2_031",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.22508100885897875,
+      "hypothesis": "you know so",
+      "reference": ""
+    },
+    {
+      "id": "v2_032",
+      "category": "keigo",
+      "cer": 0.6154,
+      "hallucinations": 0,
+      "latency": 0.6122391475364566,
+      "hypothesis": "はいでbリンクって読む端末",
+      "reference": "D-Linkって読む端末。"
+    },
+    {
+      "id": "v2_033",
+      "category": "number",
+      "cer": 0.4231,
+      "hallucinations": 2,
+      "latency": 0.7024191524833441,
+      "hypothesis": "5年前のたまたんですよこれさ6年前ですね",
+      "reference": "5年前の端末なんですよ、ごめんなさい、6年前ですね。"
+    },
+    {
+      "id": "v2_034",
+      "category": "number",
+      "cer": 0.1429,
+      "hallucinations": 0,
+      "latency": 0.2593641681596637,
+      "hypothesis": "わかりました。",
+      "reference": "分かりました。"
+    },
+    {
+      "id": "v2_035",
+      "category": "proper_noun",
+      "cer": 0.2105,
+      "hallucinations": 0,
+      "latency": 0.8114587934687734,
+      "hypothesis": "誰がそちらがモデムになるんですよね",
+      "reference": "あれはそちらがモデムになるんですよね。"
+    },
+    {
+      "id": "v2_036",
+      "category": "keigo",
+      "cer": 0.2182,
+      "hallucinations": 0,
+      "latency": 1.9716483606025577,
+      "hypothesis": "なのでまぁこちらを選びいただいてたんですけどもどうされますかっていうので私たちの方からも強制とかではなかったので",
+      "reference": "こちらをお選びいただいてたんですけども、どうされますか、というので私たちのほうからも強制とかではなかったので。"
+    },
+    {
+      "id": "v2_037",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.0817958153784275,
+      "hypothesis": "",
+      "reference": ""
+    },
+    {
+      "id": "v2_038",
+      "category": "number",
+      "cer": 1.5,
+      "hallucinations": 0,
+      "latency": 0.4681254765018821,
+      "hypothesis": "どんどん好き好きですね",
+      "reference": "月々ですね。"
+    },
+    {
+      "id": "v2_039",
+      "category": "compound",
+      "cer": 0.1628,
+      "hallucinations": 0,
+      "latency": 1.4771621553227305,
+      "hypothesis": "そうなんですよねnpt様でないって考えると今別のところから請求って来られてました",
+      "reference": "そうなんですよ、でNTT様でないって考えると、今別のところから請求って来られてました?"
+    },
+    {
+      "id": "v2_040",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.24248176626861095,
+      "hypothesis": "なので",
+      "reference": "なので"
+    },
+    {
+      "id": "v2_041",
+      "category": "keigo",
+      "cer": 0.1923,
+      "hallucinations": 0,
+      "latency": 2.0440793205052614,
+      "hypothesis": "ああ大丈夫ですよあの以前のご利用いただいてたものだったんですけども今も変えられているということだったので",
+      "reference": "大丈夫ですよ。以前のご利用いただいてたものだったんですけども、今もう変えられてるっていうことだったので。"
+    },
+    {
+      "id": "v2_042",
+      "category": "greeting",
+      "cer": 0.4286,
+      "hallucinations": 0,
+      "latency": 0.2219255305826664,
+      "hypothesis": "もしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_043",
+      "category": "keigo",
+      "cer": 0.6154,
+      "hallucinations": 0,
+      "latency": 0.6297853281721473,
+      "hypothesis": "すいませんよろしくお願い致します",
+      "reference": "よろしくお願いいたします。"
+    },
+    {
+      "id": "v2_044",
+      "category": "keigo",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.5795902581885457,
+      "hypothesis": "一種ともねー万有は最新の",
+      "reference": ""
+    },
+    {
+      "id": "v2_045",
+      "category": "greeting",
+      "cer": 0.1316,
+      "hallucinations": 0,
+      "latency": 1.1194192823022604,
+      "hypothesis": "お世話になっております私以前事業用wifiの件でご連絡をしておりました",
+      "reference": "お世話になっております。私以前事業用Wi-Fiの件でご連絡をしておりました。"
+    },
+    {
+      "id": "v2_046",
+      "category": "proper_noun",
+      "cer": 0.5385,
+      "hallucinations": 0,
+      "latency": 0.3199639655649662,
+      "hypothesis": "ciscoでシスコとか",
+      "reference": "CISCOでシスコーとか。"
+    },
+    {
+      "id": "v2_047",
+      "category": "number",
+      "cer": 0.0667,
+      "hallucinations": 0,
+      "latency": 0.8568331375718117,
+      "hypothesis": "だいたい15センチから20センチくらいの15センチですね",
+      "reference": "だいたい15センチから20センチくらいの、15センチですね。"
+    },
+    {
+      "id": "v2_048",
+      "category": "number",
+      "cer": 0.169,
+      "hallucinations": 0,
+      "latency": 1.959139971062541,
+      "hypothesis": "ああそうですよねかしこまりましたであればちょっとタイミング見てまたご連絡あの1時間以内に普通ご連絡はさせていただきますので",
+      "reference": "ああ、そうですよね。かしこまりました。であれば、ちょっとタイミング見て、またご連絡、あの1時間以内に、ちょっとご連絡はさせていただきますので。"
+    },
+    {
+      "id": "v2_049",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.1532474271953106,
+      "hypothesis": "後日",
+      "reference": "後日"
+    },
+    {
+      "id": "v2_050",
+      "category": "keigo",
+      "cer": 0.7059,
+      "hallucinations": 0,
+      "latency": 0.3730048146098852,
+      "hypothesis": "貸し込まれました",
+      "reference": "なるほどですね、かしこまりました。"
+    },
+    {
+      "id": "v2_051",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.06417746469378471,
+      "hypothesis": "",
+      "reference": "それは"
+    },
+    {
+      "id": "v2_052",
+      "category": "keigo",
+      "cer": 0.3158,
+      "hallucinations": 0,
+      "latency": 0.7068038946017623,
+      "hypothesis": "ちょっと私の方でもう一度確認してみます",
+      "reference": "一度私の方でももう一度確認してみます。"
+    },
+    {
+      "id": "v2_053",
+      "category": "short",
+      "cer": 0.2,
+      "hallucinations": 0,
+      "latency": 0.2308608302846551,
+      "hypothesis": "なるほど",
+      "reference": "なるほど。"
+    },
+    {
+      "id": "v2_054",
+      "category": "number",
+      "cer": 0.3088,
+      "hallucinations": 2,
+      "latency": 2.6127305179834366,
+      "hypothesis": "ありがとうございますはいそうしましたら数点確認事項ございましていずいただいておりましたや号名様になるんですがヴァラビーンハット奥澤様で間違いなかったですかね",
+      "reference": "そうしましたら数点確認事項ございまして、いずれいただいておりました屋号名様になるんですが、ビーンハット奥沢様でお間違いなかったですかね?"
+    },
+    {
+      "id": "v2_055",
+      "category": "greeting",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.26979782711714506,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_056",
+      "category": "keigo",
+      "cer": 0.3636,
+      "hallucinations": 0,
+      "latency": 0.3378290766850114,
+      "hypothesis": "はい失礼します",
+      "reference": "はい、失礼いたします。"
+    },
+    {
+      "id": "v2_057",
+      "category": "number",
+      "cer": 0.12,
+      "hallucinations": 0,
+      "latency": 0.7166344756260514,
+      "hypothesis": "だと今の現状だともしかすると2200円であの",
+      "reference": "だと、今の現状だともしかすると2200円で、あの、"
+    },
+    {
+      "id": "v2_058",
+      "category": "proper_noun",
+      "cer": 0.1071,
+      "hallucinations": 0,
+      "latency": 0.931295751594007,
+      "hypothesis": "はいいうのでここのサービスの内容が変わるものだったので",
+      "reference": "はい、なのでここのサービスの内容が変わるものだったので、"
+    },
+    {
+      "id": "v2_059",
+      "category": "greeting",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.25474845990538597,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_060",
+      "category": "number",
+      "cer": 0.0758,
+      "hallucinations": 0,
+      "latency": 2.004716385155916,
+      "hypothesis": "だいたいそうですね本来ですと他のお客様ですと4000円から5000円がないからくらいでお支払いいただいているものになるんですよね",
+      "reference": "だいたいそうですね、本来ですと他のお客様ですと4000円から5000円いかないかくらいでお支払いいただいているものになるんですよね。"
+    },
+    {
+      "id": "v2_061",
+      "category": "greeting",
+      "cer": 0.2,
+      "hallucinations": 0,
+      "latency": 0.18931346479803324,
+      "hypothesis": "もしもし",
+      "reference": "もしもし。"
+    },
+    {
+      "id": "v2_062",
+      "category": "short",
+      "cer": 0.2,
+      "hallucinations": 0,
+      "latency": 0.18525501247495413,
+      "hypothesis": "そうですよ",
+      "reference": "そうです。"
+    },
+    {
+      "id": "v2_063",
+      "category": "short",
+      "cer": 2.5,
+      "hallucinations": 0,
+      "latency": 0.12100017163902521,
+      "hypothesis": "so not",
+      "reference": "その"
+    },
+    {
+      "id": "v2_064",
+      "category": "proper_noun",
+      "cer": 0.2222,
+      "hallucinations": 1,
+      "latency": 1.557459196075797,
+      "hypothesis": "お電話かりいただきありがとうございます私以前事業用wifiを取り次ぎを担当しておりましたitパートナーの水野ともしまして",
+      "reference": "お電話をお借りいただきありがとうございます。私以前事業用Wi-Fiの取次を担当しておりましたITパートナーの水野と申しまして。"
+    },
+    {
+      "id": "v2_065",
+      "category": "compound",
+      "cer": 0.1277,
+      "hallucinations": 1,
+      "latency": 1.5267357779666781,
+      "hypothesis": "はい後日ご輸送で新しい端末をお送りいたしますので届きましたら差し替えをお願いしておりまして",
+      "reference": "はい、後日ご郵送で新しい端末をお送り出しますので、届きましたら差し替えをお願いしておりまして。"
+    },
+    {
+      "id": "v2_066",
+      "category": "greeting",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.232315625064075,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_067",
+      "category": "proper_noun",
+      "cer": 0.6364,
+      "hallucinations": 0,
+      "latency": 0.2912042671814561,
+      "hypothesis": "数とかであれば",
+      "reference": "スートッカーであれば。"
+    },
+    {
+      "id": "v2_068",
+      "category": "keigo",
+      "cer": 0.3125,
+      "hallucinations": 0,
+      "latency": 0.6297916704788804,
+      "hypothesis": "今そちらとか大丈夫そうですかね",
+      "reference": "ではそちらで大丈夫そうですかね。"
+    },
+    {
+      "id": "v2_069",
+      "category": "compound",
+      "cer": 0.0714,
+      "hallucinations": 0,
+      "latency": 1.2596965348348022,
+      "hypothesis": "どんどん更新していってほしいってことで皆さんもいろいろ変えられたりするんですよね",
+      "reference": "どんどん更新していってほしくてってことで皆さんもいろいろ変えられたりするんですよね。"
+    },
+    {
+      "id": "v2_070",
+      "category": "greeting",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.2964816801249981,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_071",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.09034892544150352,
+      "hypothesis": "",
+      "reference": ""
+    },
+    {
+      "id": "v2_072",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.1807020865380764,
+      "hypothesis": "mhm",
+      "reference": ""
+    },
+    {
+      "id": "v2_073",
+      "category": "number",
+      "cer": 0.2727,
+      "hallucinations": 0,
+      "latency": 2.656265373341739,
+      "hypothesis": "今のサポートのご連絡をさせていただいているんですけども一応以前お取り次ぎさせていただいたのは2020年なんですよね",
+      "reference": "そうですそうです、今サポートのご連絡をさせていただいているんですけども、以前お取次ぎさせていただいたのが2020年だったんですよね。"
+    },
+    {
+      "id": "v2_074",
+      "category": "compound",
+      "cer": 0.4906,
+      "hallucinations": 0,
+      "latency": 2.421409770846367,
+      "hypothesis": "天井についてますあかしこまりましたそういう端末でご自身で書いたりすることって可能そうです例えば脚立に乗っていいとかであります",
+      "reference": "承知しました。そういった端末ってご自身で変えたりすることって可能そうです?例えば脚立に乗ってとかであれば。"
+    },
+    {
+      "id": "v2_075",
+      "category": "number",
+      "cer": 0.1053,
+      "hallucinations": 1,
+      "latency": 3.2147983703762293,
+      "hypothesis": "分かりましたあればこちらのご携帯番号の方にも一度ご連絡させていただいて引き払い様の方にも一度こちらの部分内容をお伝えさせていただければと思いますので",
+      "reference": "わかりました。であればこちらのご携帯番号の方にも一度ご連絡させていただいて、吹原様の方にも一度こちらの部分内容をお伝えさせていただければと思いますので。"
+    },
+    {
+      "id": "v2_076",
+      "category": "compound",
+      "cer": 0.1233,
+      "hallucinations": 1,
+      "latency": 2.464972885325551,
+      "hypothesis": "もし今正直言いますとこちら強制とかの内容ではなかったのでそのままでいいというのであれば全然そのままでは問題はない内容ではあったんですよね",
+      "reference": "でもし今正直言いますと、こちら矯正とかの内容ではなかったので、そのままでいいっていうのであれば全然そのままでも問題はない内容ではあったんですよね。"
+    },
+    {
+      "id": "v2_077",
+      "category": "greeting",
+      "cer": 0.1667,
+      "hallucinations": 0,
+      "latency": 0.3108691852539778,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし"
+    },
+    {
+      "id": "v2_078",
+      "category": "proper_noun",
+      "cer": 0.1667,
+      "hallucinations": 0,
+      "latency": 0.6062058312818408,
+      "hypothesis": "買って使われてましたモデムとかは",
+      "reference": "使って使われてました。モデムとかは。"
+    },
+    {
+      "id": "v2_079",
+      "category": "compound",
+      "cer": 0.1364,
+      "hallucinations": 0,
+      "latency": 1.3482770808041096,
+      "hypothesis": "分かりましたまたちょっとお日にちとかも改めてわからないですねあっいや大丈夫ですよ",
+      "reference": "わかりました。またちょっとお日にちとかも改めてわからないですね。あ、いや、大丈夫ですよ。"
+    },
+    {
+      "id": "v2_080",
+      "category": "proper_noun",
+      "cer": 0.1818,
+      "hallucinations": 0,
+      "latency": 2.000373342074454,
+      "hypothesis": "お世話になってます私先ほどwifiの件でご連絡をしていたitパートナーの水野と申しましてどうでしたかね端末",
+      "reference": "お世話になってます。私先ほどWi-Fiの件でご連絡してたITパートナーの水野と申しまして、どうでしたかね端末。"
+    },
+    {
+      "id": "v2_081",
+      "category": "number",
+      "cer": 0.2329,
+      "hallucinations": 2,
+      "latency": 2.4842883879318833,
+      "hypothesis": "ちなみにもし繋がらなかった場合固定のお電話番号にもう一度こちらのお連絡先の方にご連絡させていただきたかったんですけども",
+      "reference": "ちなみに、もしつながらなかった場合、一応固定のお電話番号にもう一度ちょっとこちらのご連絡先の方にご連絡させていただけたかったんですけども、吹春様。"
+    },
+    {
+      "id": "v2_082",
+      "category": "greeting",
+      "cer": 0.4286,
+      "hallucinations": 0,
+      "latency": 0.1946610976010561,
+      "hypothesis": "もしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_083",
+      "category": "greeting",
+      "cer": 0.2,
+      "hallucinations": 0,
+      "latency": 0.19030825700610876,
+      "hypothesis": "もしもし",
+      "reference": "もしもし。"
+    },
+    {
+      "id": "v2_084",
+      "category": "compound",
+      "cer": 0.1034,
+      "hallucinations": 0,
+      "latency": 2.18791520409286,
+      "hypothesis": "強制ではないので交換はしなくてもいいものであったんですけどもただですね端末自体も古くなっているものだったので",
+      "reference": "強制ではないので、交換はしなくてもいいものではあったんですけども、ただですね、端末自体も古くなってるものだったので、"
+    },
+    {
+      "id": "v2_085",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.1537846103310585,
+      "hypothesis": "david",
+      "reference": ""
+    },
+    {
+      "id": "v2_086",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.114042061381042,
+      "hypothesis": "",
+      "reference": "あっ。"
+    },
+    {
+      "id": "v2_087",
+      "category": "number",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 1.3744986969977617,
+      "hypothesis": "ですかねあの右後ろ側に多分型番とか入ってたりするんですけども反対側の",
+      "reference": "後ろ側に多分型番とか入ってたりするんですけども、反対側の"
+    },
+    {
+      "id": "v2_088",
+      "category": "proper_noun",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.7002216596156359,
+      "hypothesis": "on the surface of my teeth i have a bit of a tingling show at the end",
+      "reference": ""
+    },
+    {
+      "id": "v2_089",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.22793383710086346,
+      "hypothesis": "mhm mhm",
+      "reference": ""
+    },
+    {
+      "id": "v2_090",
+      "category": "proper_noun",
+      "cer": 0.1043,
+      "hallucinations": 0,
+      "latency": 5.5292552672326565,
+      "hypothesis": "ありがとうございますそうしましたら私水野の方での確認以上になりまして中端戸窓口のものからですね新しい端末ご送付の流れについてご連絡させていただいているのと今先ほどちょっと私全部口頭でお話しすべてしていたのでメールですね本田様の方にもいつを送らせていただいて本田様の方でメール見ていただいてからの端末ご発送になりますので",
+      "reference": "ありがとうございます。そうしましたら私、水野の方での確認以上になりまして、担当窓口の者からですね、新しい端末ご送付の流れについてご連絡させていただいているのと、先ほどちょっと私全部口頭でお話しすべてしてたので、メールですね、本田様の方にも一通送らせていただいて、本田様の方でメール見ていただいてからの端末ご発送になりますので。"
+    },
+    {
+      "id": "v2_091",
+      "category": "compound",
+      "cer": 0.2083,
+      "hallucinations": 3,
+      "latency": 1.975254762917757,
+      "hypothesis": "今回は後日ご輸送で新しい玉松をお送りしますので届いたら差し替えをお願いしていたんですよね",
+      "reference": "今回ですね、後日ご郵送で新しい端末をお送りしますので、届いたら差し替えをお願いしてたんですよね。"
+    },
+    {
+      "id": "v2_092",
+      "category": "short",
+      "cer": 1.3333,
+      "hallucinations": 0,
+      "latency": 0.1914814282208681,
+      "hypothesis": "nari",
+      "reference": "なりん"
+    },
+    {
+      "id": "v2_093",
+      "category": "greeting",
+      "cer": 0.4286,
+      "hallucinations": 0,
+      "latency": 0.24676289036870003,
+      "hypothesis": "もしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_094",
+      "category": "greeting",
+      "cer": 0.2857,
+      "hallucinations": 0,
+      "latency": 0.2216287311166525,
+      "hypothesis": "あもしもし",
+      "reference": "あ、もしもし。"
+    },
+    {
+      "id": "v2_095",
+      "category": "keigo",
+      "cer": 0.4545,
+      "hallucinations": 0,
+      "latency": 0.33263933565467596,
+      "hypothesis": "はいせいだします",
+      "reference": "はい、失礼いたします。"
+    },
+    {
+      "id": "v2_096",
+      "category": "keigo",
+      "cer": 0.4286,
+      "hallucinations": 0,
+      "latency": 0.16848956607282162,
+      "hypothesis": "stadと",
+      "reference": "sta.da."
+    },
+    {
+      "id": "v2_097",
+      "category": "short",
+      "cer": 0.0,
+      "hallucinations": 0,
+      "latency": 0.08001386094838381,
+      "hypothesis": "",
+      "reference": ""
+    },
+    {
+      "id": "v2_098",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.2615692401304841,
+      "hypothesis": "guy hey gary",
+      "reference": ""
+    },
+    {
+      "id": "v2_099",
+      "category": "short",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 0.2061482472345233,
+      "hypothesis": "it's",
+      "reference": ""
+    },
+    {
+      "id": "v2_100",
+      "category": "compound",
+      "cer": 1.0,
+      "hallucinations": 0,
+      "latency": 1.4166553812101483,
+      "hypothesis": "ああわかりましたもしかするとそうですねもうたまずで交換されておっしゃるかもしれないので",
+      "reference": ""
+    }
+  ]
+}
