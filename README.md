@@ -24,6 +24,9 @@ jaeval benchmark tasks/stt/corpus_v2_clean.yaml --model deepgram
 # Run auto-research
 jaeval research "Japanese STT evaluation state of the art"
 
+# Compare benchmark results across providers
+jaeval compare results/deepgram_v2_full.json results/openai_v2_full.json
+
 # Run LLM-as-judge on a call
 jaeval judge --scorecard results/scorecards/call.json
 ```

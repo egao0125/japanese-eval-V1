@@ -7,7 +7,7 @@ pip install -e ".[dev]"
 jaeval --help
 
 ### Run Tests
-pytest tests/
+python -m pytest tests/
 
 ### Architecture
 - src/jaeval/core/ — Japanese NLP: normalize, CER, hallucination, audio
