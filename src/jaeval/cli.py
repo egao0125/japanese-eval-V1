@@ -178,6 +178,23 @@ def judge(
 
 
 @app.command()
+def compare(
+    result_files: list[Path] = typer.Argument(..., help="Benchmark result JSON files to compare"),
+    output: Path = typer.Option(None, help="Output markdown path"),
+) -> None:
+    """Compare benchmark results across providers."""
+    from .harness.compare import format_comparison_markdown
+
+    md = format_comparison_markdown(result_files)
+    console.print(md)
+
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(md, encoding="utf-8")
+        console.print(f"\nComparison saved to {output}")
+
+
+@app.command()
 def research(
     topic: str = typer.Argument("Japanese voice AI evaluation state of the art"),
     model: str = typer.Option("claude-sonnet-4-20250514", help="LLM model for planning/synthesis"),

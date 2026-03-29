@@ -7,6 +7,17 @@ from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
+# Lazy-initialized lock to serialize arxiv API calls (avoids 429 rate limits).
+_arxiv_lock: asyncio.Lock | None = None
+
+
+def _get_arxiv_lock() -> asyncio.Lock:
+    """Return the module-level asyncio lock, creating it lazily."""
+    global _arxiv_lock
+    if _arxiv_lock is None:
+        _arxiv_lock = asyncio.Lock()
+    return _arxiv_lock
+
 
 @dataclass
 class PaperResult:
@@ -31,17 +42,38 @@ class PaperResult:
 class ArxivSource:
     """Search arxiv for papers using the arxiv Python package."""
 
+    MAX_RETRIES = 3
+    RETRY_DELAY = 30.0  # seconds between retries on 429
+
     async def search(self, query: str, max_results: int = 10) -> list[PaperResult]:
         """Search arxiv and return structured results.
 
-        Runs the synchronous arxiv client in a thread executor to avoid
-        blocking the event loop.
+        Serializes calls via a module-level lock to respect arxiv rate limits.
+        Retries on HTTP 429 with exponential backoff.
         """
-        loop = asyncio.get_running_loop()
-        return await loop.run_in_executor(None, self._search_sync, query, max_results)
+        async with _get_arxiv_lock():
+            loop = asyncio.get_running_loop()
+            for attempt in range(1, self.MAX_RETRIES + 1):
+                results = await loop.run_in_executor(
+                    None, self._search_sync, query, max_results
+                )
+                if results is not None:
+                    return results
+                # _search_sync returns None on 429 -- retry after delay
+                delay = self.RETRY_DELAY * attempt
+                logger.info(
+                    "ArXiv 429 for %r -- retry %d/%d in %.0fs",
+                    query, attempt, self.MAX_RETRIES, delay,
+                )
+                await asyncio.sleep(delay)
+            logger.warning("ArXiv search exhausted retries for %r", query)
+            return []
 
-    def _search_sync(self, query: str, max_results: int) -> list[PaperResult]:
-        """Synchronous arxiv search (run in executor)."""
+    def _search_sync(self, query: str, max_results: int) -> list[PaperResult] | None:
+        """Synchronous arxiv search (run in executor).
+
+        Returns None on HTTP 429 (signals caller to retry), [] on other errors.
+        """
         try:
             import arxiv
         except ImportError:
@@ -49,7 +81,12 @@ class ArxivSource:
             return []
 
         try:
-            client = arxiv.Client()
+            # Use page_size matching max_results to avoid over-fetching.
+            # num_retries=5 with delay_seconds=10 gives the arxiv client
+            # time to clear rate limits before giving up.
+            client = arxiv.Client(
+                page_size=max_results, delay_seconds=10.0, num_retries=5
+            )
             search = arxiv.Search(
                 query=query,
                 max_results=max_results,
@@ -70,5 +107,9 @@ class ArxivSource:
                 )
             return results
         except Exception as exc:
+            exc_str = str(exc)
+            if "429" in exc_str:
+                logger.warning("ArXiv rate-limited for query %r", query)
+                return None  # signal retry
             logger.error("ArXiv search failed for query %r: %s", query, exc)
             return []
