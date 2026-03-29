@@ -255,5 +255,76 @@ def research(
         console.print(f"\n[green]Research {i}/{len(topics)} complete![/green]")
 
 
+@app.command("eval")
+def eval_call(
+    call_json: Path = typer.Argument(..., help="Path to call JSON with turns array"),
+    run_judge: bool = typer.Option(True, help="Run Tier 2 LLM judge"),
+    judge_model: str = typer.Option("claude-sonnet-4-20250514", help="Judge model"),
+    judge_config: Path = typer.Option(None, "--judge-config", help="Judge config YAML"),
+    output: Path = typer.Option(None, help="Output JSON path"),
+) -> None:
+    """Evaluate a call with Tier 1 scorecard + optional Tier 2 LLM judge.
+
+    Input JSON format: {"call_sid": "...", "turns": [...], "duration_sec": 120}
+    Each turn: {"user_text": "...", "bot_text": "...", "confidence": -0.05, ...}
+    """
+    import json as _json
+
+    from .integration import evaluate_call
+
+    if not call_json.exists():
+        console.print(f"[red]File not found: {call_json}[/red]")
+        raise typer.Exit(1)
+
+    with open(call_json, "r", encoding="utf-8") as f:
+        data = _json.load(f)
+
+    call_sid = data.get("call_sid", call_json.stem)
+    turns = data.get("turns", [])
+    duration_sec = data.get("duration_sec", 0.0)
+
+    if not turns:
+        console.print("[red]No turns found in input JSON.[/red]")
+        raise typer.Exit(1)
+
+    result = evaluate_call(
+        call_sid=call_sid,
+        turns=turns,
+        duration_sec=duration_sec,
+        run_judge=run_judge,
+        judge_model=judge_model,
+        judge_config_yaml=judge_config,
+    )
+
+    # Display Tier 1
+    grade_colors = {"A": "green", "B": "cyan", "C": "yellow", "D": "red", "F": "red bold"}
+    gc = grade_colors.get(result.grade, "white")
+    console.print(f"\n[bold]Call Evaluation: {call_sid}[/bold]\n")
+    console.print(f"  [{gc}]Grade: {result.grade}[/{gc}]")
+    console.print(f"  Task Completion:  {result.task_completion}")
+    console.print(f"  STT Errors:       {result.stt_error_count}")
+    console.print(f"  Hallucinations:   {result.hallucination_count}")
+    if result.banned_words_used:
+        console.print(f"  Banned Words:     {', '.join(result.banned_words_used)}")
+    console.print(f"  Avg Latency:      {result.avg_latency_sec:.3f}s")
+
+    # Display Tier 2
+    if result.weighted_score is not None:
+        console.print(f"\n  [bold]LLM Judge Score: {result.weighted_score}/5[/bold]")
+        ready_tag = "[green]YES[/green]" if result.production_ready else "[red]NO[/red]"
+        console.print(f"  Production Ready: {ready_tag}")
+        if result.biggest_issue:
+            console.print(f"  Biggest Issue:    {result.biggest_issue}")
+        for dim, entry in result.dimension_scores.items():
+            console.print(f"    {dim:<25} {entry['score']}/5")
+
+    # Save JSON
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with open(output, "w", encoding="utf-8") as f:
+            _json.dump(result.to_dict(), f, indent=2, ensure_ascii=False)
+        console.print(f"\n  Results saved to {output}")
+
+
 if __name__ == "__main__":
     app()

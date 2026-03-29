@@ -1,0 +1,34 @@
+{
+  "call_sid": "SAMPLE_001",
+  "duration_sec": 65.0,
+  "turns": [
+    {
+      "user_text": "もしもし、Recoについて聞きたいんですけど",
+      "bot_text": "はい、StepAIのRecoについてですね。お電話ありがとうございます。どのような点についてお知りになりたいですか？",
+      "confidence": -0.05,
+      "latency_ms": 850,
+      "duration_s": 2.1
+    },
+    {
+      "user_text": "料金プランを教えてください",
+      "bot_text": "Recoの料金プランをご案内します。スタータープランは月額5,000円、プロプランは月額15,000円です。",
+      "confidence": -0.03,
+      "latency_ms": 1100,
+      "duration_s": 2.8
+    },
+    {
+      "user_text": "デモを見たいんですが",
+      "bot_text": "デモのご予約を承りました。担当者から折り返しご連絡します。お名前とご連絡先をお伺いしてもよろしいですか？",
+      "confidence": -0.02,
+      "latency_ms": 950,
+      "duration_s": 1.9
+    },
+    {
+      "user_text": "田中です。03-1234-5678です",
+      "bot_text": "田中様、お電話番号03-1234-5678ですね。ありがとうございます。担当者よりご連絡します。",
+      "confidence": -0.08,
+      "latency_ms": 1200,
+      "duration_s": 3.2
+    }
+  ]
+}
