@@ -1,0 +1,25 @@
+task: stt_telephony_keigo
+type: stt
+version: "1.0"
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+  format: wav
+
+pipeline:
+  codec: null
+  vad: null
+  energy_gate_rms: null
+
+metrics:
+  - cer
+  - hallucination_count
+
+categories:
+  - keigo
+
+gates:
+  median_cer:
+    pass: 0.10
+    warn: 0.20

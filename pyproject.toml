@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "japanese-eval"
+version = "0.1.0"
+description = "Auto-research + evaluation harness for Japanese voice AI"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.9.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "pyyaml>=6.0",
+    "httpx>=0.27.0",
+    "jinja2>=3.1.0",
+    "python-dotenv>=1.0.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+research = ["anthropic>=0.40.0", "arxiv>=2.0.0"]
+gpu = ["torch>=2.0.0", "faster-whisper>=1.0.0", "soundfile>=0.12.0", "librosa>=0.10.0"]
+lenient = ["fugashi>=1.3.0", "unidic-lite>=1.0.0"]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.24.0", "ruff>=0.6.0", "mypy>=1.11.0"]
+
+[project.scripts]
+jaeval = "jaeval.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

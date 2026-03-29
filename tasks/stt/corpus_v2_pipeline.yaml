@@ -1,0 +1,23 @@
+task: stt_corpus_v2_pipeline
+type: stt
+version: "1.0"
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+
+pipeline:
+  codec: g711_mulaw
+  vad: silero
+  energy_gate_rms: 0.01
+
+metrics:
+  - cer
+  - hallucination_count
+  - latency_p50
+  - latency_p90
+
+gates:
+  median_cer:
+    pass: 0.05
+    warn: 0.08

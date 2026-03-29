@@ -1,0 +1,36 @@
+task: stt_corpus_v2_clean
+type: stt
+version: "1.0"
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+  format: wav
+
+pipeline:
+  codec: null
+  vad: null
+  energy_gate_rms: null
+
+metrics:
+  - cer
+  - hallucination_count
+  - latency_p50
+  - latency_p90
+  - rtf
+
+categories:
+  - keigo
+  - proper_noun
+  - number
+  - compound
+  - short
+  - greeting
+
+gates:
+  median_cer:
+    pass: 0.05
+    warn: 0.08
+  hallucinations:
+    pass: 0
+    warn: 2

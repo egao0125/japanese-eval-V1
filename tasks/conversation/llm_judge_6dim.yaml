@@ -1,0 +1,20 @@
+task: llm_judge_6dim
+type: conversation
+version: "1.0"
+description: >
+  6-dimension LLM-as-judge evaluation for Japanese business phone AI.
+  Weights sum to 1.0. Production-ready requires weighted_score >= 3.5
+  and all dimensions >= 2.
+
+judge:
+  model: claude-sonnet-4-20250514
+  max_tokens: 2048
+  dimensions:
+    task_completion: 0.30
+    natural_flow: 0.20
+    stt_error_handling: 0.20
+    prompt_compliance: 0.15
+    information_accuracy: 0.10
+    caller_experience: 0.05
+  production_ready_threshold: 3.5
+  min_dimension_score: 2
