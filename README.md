@@ -151,7 +151,7 @@ Sources: ArXiv, GitHub, HuggingFace, Brave Web Search. Reports output as structu
 
 ## Tests
 
-132 tests covering core NLP, harness, evaluators, pipeline, integration, and research modules:
+178 tests covering core NLP, audio, harness, report formatting, evaluators, pipeline, integration, and research modules:
 
 ```bash
 python -m pytest tests/ -v

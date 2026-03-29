@@ -10,7 +10,7 @@ jaeval --help
 
 ### Run Tests
 ```bash
-python -m pytest tests/   # 140 tests
+python -m pytest tests/   # 178 tests
 ruff check src/ tests/
 ```
 
