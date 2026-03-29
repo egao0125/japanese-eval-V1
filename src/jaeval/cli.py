@@ -104,13 +104,19 @@ def list_tasks(
 
 @app.command("list-models")
 def list_models() -> None:
-    """List available model providers."""
-    from .harness.providers import PROVIDER_REGISTRY
+    """List available model providers and aliases."""
+    from .harness.providers import MODEL_ALIASES, PROVIDER_REGISTRY
 
-    console.print("[bold]Available providers:[/bold]\n")
+    console.print("[bold]Providers:[/bold]\n")
     for name, cls in sorted(PROVIDER_REGISTRY.items()):
         gpu_tag = " [yellow](GPU)[/yellow]" if cls.requires_gpu else ""
         console.print(f"  {name}{gpu_tag}")
+
+    if MODEL_ALIASES:
+        console.print("\n[bold]Model aliases:[/bold]\n")
+        for alias, (base, kwargs) in sorted(MODEL_ALIASES.items()):
+            model_id = kwargs.get("model_id", "")
+            console.print(f"  {alias}  →  {base} ({model_id})")
 
 
 @app.command()
