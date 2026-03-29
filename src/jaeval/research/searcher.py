@@ -10,10 +10,12 @@ from .sources import (
     ArxivSource,
     GitHubSource,
     HuggingFaceSource,
+    WebSearchSource,
     PaperResult,
     RepoResult,
     HFModelResult,
     HFDatasetResult,
+    WebResult,
 )
 
 logger = logging.getLogger(__name__)
@@ -27,6 +29,7 @@ class SearchResults:
     repos: list[RepoResult] = field(default_factory=list)
     models: list[HFModelResult] = field(default_factory=list)
     datasets: list[HFDatasetResult] = field(default_factory=list)
+    web_results: list[WebResult] = field(default_factory=list)
 
 
 class ParallelSearcher:
@@ -37,6 +40,7 @@ class ParallelSearcher:
         self.arxiv = ArxivSource()
         self.github = GitHubSource()
         self.huggingface = HuggingFaceSource()
+        self.web = WebSearchSource()
 
     async def search(self, plan: ResearchPlan) -> SearchResults:
         """Execute all searches in parallel, then deduplicate."""
@@ -60,6 +64,10 @@ class ParallelSearcher:
             tasks.append(asyncio.ensure_future(self.huggingface.search_datasets(q, self.max_per_query)))
             task_labels.append(f"hf_dataset:{q}")
 
+        for q in getattr(plan, "web_queries", []):
+            tasks.append(asyncio.ensure_future(self.web.search(q, self.max_per_query)))
+            task_labels.append(f"web:{q}")
+
         # Run all concurrently
         raw_results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -68,6 +76,7 @@ class ParallelSearcher:
         repos: dict[str, RepoResult] = {}
         models: dict[str, HFModelResult] = {}
         datasets: dict[str, HFDatasetResult] = {}
+        web: dict[str, WebResult] = {}
 
         for label, result in zip(task_labels, raw_results):
             if isinstance(result, BaseException):
@@ -83,10 +92,13 @@ class ParallelSearcher:
                     models.setdefault(item.model_id, item)
                 elif isinstance(item, HFDatasetResult):
                     datasets.setdefault(item.dataset_id, item)
+                elif isinstance(item, WebResult):
+                    web.setdefault(item.url, item)
 
         return SearchResults(
             papers=list(papers.values()),
             repos=list(repos.values()),
             models=list(models.values()),
             datasets=list(datasets.values()),
+            web_results=list(web.values()),
         )

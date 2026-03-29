@@ -116,6 +116,16 @@ Use proper citations. Be specific and technical. If information is insufficient 
                 lines.append(f"  URL: {d.url}")
             sections.append("\n".join(lines))
 
+        # Web results
+        if results.web_results:
+            lines = ["## Web Search Results"]
+            for w in results.web_results:
+                lines.append(f"- **{w.title}**")
+                lines.append(f"  URL: {w.url}")
+                if w.description:
+                    lines.append(f"  {w.description}")
+            sections.append("\n".join(lines))
+
         if not sections:
             return "(No results found across any source.)"
 

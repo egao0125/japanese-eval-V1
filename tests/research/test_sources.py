@@ -2,6 +2,7 @@
 from jaeval.research.sources.arxiv import PaperResult
 from jaeval.research.sources.github import RepoResult
 from jaeval.research.sources.huggingface import HFModelResult
+from jaeval.research.sources.web import WebResult
 
 
 class TestDataclasses:
@@ -41,3 +42,12 @@ class TestDataclasses:
             url="https://huggingface.co/test/model",
         )
         assert "1000" in m.citation
+
+    def test_web_result_citation(self):
+        w = WebResult(
+            title="Test Page",
+            url="https://example.com/test",
+            description="A test page description",
+        )
+        assert "Test Page" in w.citation
+        assert "example.com" in w.citation

@@ -18,6 +18,7 @@ class ResearchPlan:
     arxiv_queries: list[str] = field(default_factory=list)
     github_queries: list[str] = field(default_factory=list)
     huggingface_queries: list[str] = field(default_factory=list)
+    web_queries: list[str] = field(default_factory=list)
 
 
 def _extract_json(text: str) -> dict:
@@ -78,7 +79,8 @@ Generate a structured research plan as JSON:
     "questions": ["3-5 research questions to investigate"],
     "arxiv_queries": ["3-5 arxiv search queries (use technical terms, e.g. 'Japanese ASR evaluation CER')"],
     "github_queries": ["3-5 GitHub search queries (e.g. 'japanese speech recognition benchmark')"],
-    "huggingface_queries": ["3-5 HuggingFace model/dataset search queries (e.g. 'japanese asr whisper')"]
+    "huggingface_queries": ["3-5 HuggingFace model/dataset search queries (e.g. 'japanese asr whisper')"],
+    "web_queries": ["3-5 general web search queries (e.g. 'Japanese speech recognition benchmark comparison 2024')"]
 }}
 
 Focus on: Japanese speech recognition, TTS, voice agents, evaluation methods, telephony.
@@ -104,6 +106,7 @@ Return ONLY the JSON object, no other text."""
             arxiv_queries=data.get("arxiv_queries", []),
             github_queries=data.get("github_queries", []),
             huggingface_queries=data.get("huggingface_queries", []),
+            web_queries=data.get("web_queries", []),
         )
 
     @staticmethod
@@ -115,4 +118,5 @@ Return ONLY the JSON object, no other text."""
             arxiv_queries=[topic, f"Japanese {topic}"],
             github_queries=[topic],
             huggingface_queries=[topic],
+            web_queries=[topic, f"{topic} benchmark comparison"],
         )

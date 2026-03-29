@@ -59,7 +59,8 @@ class ResearchOrchestrator:
             f"  Found {len(results.papers)} papers, "
             f"{len(results.repos)} repos, "
             f"{len(results.models)} models, "
-            f"{len(results.datasets)} datasets"
+            f"{len(results.datasets)} datasets, "
+            f"{len(results.web_results)} web results"
         )
 
         # 3. Read & Summarize
