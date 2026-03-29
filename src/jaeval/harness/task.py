@@ -84,6 +84,7 @@ class TaskConfig(BaseModel):
     pipeline: PipelineConfig | None = None
     metrics: list[str] = Field(default_factory=lambda: ["cer"])
     categories: list[str] = Field(default_factory=list)
+    filter_categories: list[str] = Field(default_factory=list)
     gates: dict[str, GateThreshold] = Field(default_factory=dict)
 
 

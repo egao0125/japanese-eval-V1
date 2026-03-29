@@ -1,0 +1,19 @@
+task: stt_proper_noun
+type: stt
+version: "1.0"
+description: >
+  Proper noun utterances only. Tests recognition of company names,
+  product names (Reco, StepAI), and person names.
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+
+filter_categories: [proper_noun]
+
+metrics: [cer, hallucination_count, latency_p50]
+
+gates:
+  median_cer:
+    pass: 0.08
+    warn: 0.15

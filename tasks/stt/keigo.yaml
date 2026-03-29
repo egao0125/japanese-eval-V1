@@ -1,0 +1,19 @@
+task: stt_keigo
+type: stt
+version: "1.0"
+description: >
+  Keigo (敬語) utterances only. Tests formal business Japanese
+  recognition: 尊敬語, 謙譲語, 丁寧語.
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+
+filter_categories: [keigo]
+
+metrics: [cer, hallucination_count, latency_p50]
+
+gates:
+  median_cer:
+    pass: 0.05
+    warn: 0.10

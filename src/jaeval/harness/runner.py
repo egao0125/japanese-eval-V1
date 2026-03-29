@@ -148,12 +148,19 @@ class BenchmarkRunner:
 
         utterance_results: list[UtteranceResult] = []
 
+        # Category filter
+        cat_filter = set(self.task.filter_categories) if self.task.filter_categories else None
+
         for entry in ground_truth:
             entry_id = entry["id"]
             ref_text = entry["text"]
             category = entry.get("category", "unknown")
             wav_name = entry["wav"]
             wav_path = corpus_dir / wav_name
+
+            # Skip if category not in filter
+            if cat_filter and category not in cat_filter:
+                continue
 
             # Skip missing WAV files
             if not wav_path.exists():

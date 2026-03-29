@@ -1,0 +1,19 @@
+task: stt_short
+type: stt
+version: "1.0"
+description: >
+  Short utterances only (<5 chars). Tests recognition of はい, ええ,
+  もしもし, うん etc. Hardest category for most STT models.
+
+corpus:
+  path: corpora/stt/corpus_v2
+  ground_truth: ground_truth.json
+
+filter_categories: [short]
+
+metrics: [cer, hallucination_count, latency_p50]
+
+gates:
+  median_cer:
+    pass: 0.10
+    warn: 0.25
