@@ -100,7 +100,7 @@ Return ONLY the JSON object, no other text."""
             logger.warning("Failed to parse planner JSON, using fallback queries for topic: %s", topic)
             return self._fallback_plan(topic)
 
-        return ResearchPlan(
+        plan = ResearchPlan(
             topic=topic,
             questions=data.get("questions", []),
             arxiv_queries=data.get("arxiv_queries", []),
@@ -108,6 +108,47 @@ Return ONLY the JSON object, no other text."""
             huggingface_queries=data.get("huggingface_queries", []),
             web_queries=data.get("web_queries", []),
         )
+        # Merge in baseline queries that are known to return results,
+        # ensuring we always get some data even if LLM queries are too specific.
+        plan = self._merge_baseline_queries(plan)
+        return plan
+
+    # Baseline queries known to return results across sources.
+    _BASELINE_HF = [
+        "japanese asr whisper",
+        "japanese speech recognition",
+        "japanese tts",
+    ]
+    _BASELINE_ARXIV = [
+        "Japanese speech recognition",
+        "Japanese text to speech evaluation",
+    ]
+    _BASELINE_GITHUB = [
+        "japanese speech",
+        "whisper japanese",
+    ]
+
+    @staticmethod
+    def _merge_baseline_queries(plan: ResearchPlan) -> ResearchPlan:
+        """Add baseline queries to the plan, avoiding duplicates."""
+        def _merge(existing: list[str], baseline: list[str]) -> list[str]:
+            existing_lower = {q.lower() for q in existing}
+            for q in baseline:
+                if q.lower() not in existing_lower:
+                    existing.append(q)
+                    existing_lower.add(q.lower())
+            return existing
+
+        plan.huggingface_queries = _merge(
+            plan.huggingface_queries, ResearchPlanner._BASELINE_HF
+        )
+        plan.arxiv_queries = _merge(
+            plan.arxiv_queries, ResearchPlanner._BASELINE_ARXIV
+        )
+        plan.github_queries = _merge(
+            plan.github_queries, ResearchPlanner._BASELINE_GITHUB
+        )
+        return plan
 
     @staticmethod
     def _fallback_plan(topic: str) -> ResearchPlan:
@@ -115,8 +156,8 @@ Return ONLY the JSON object, no other text."""
         return ResearchPlan(
             topic=topic,
             questions=[f"What is the current state of the art for: {topic}?"],
-            arxiv_queries=[topic, f"Japanese {topic}"],
-            github_queries=[topic],
-            huggingface_queries=[topic],
+            arxiv_queries=[topic, f"Japanese {topic}"] + ResearchPlanner._BASELINE_ARXIV,
+            github_queries=[topic] + ResearchPlanner._BASELINE_GITHUB,
+            huggingface_queries=[topic] + ResearchPlanner._BASELINE_HF,
             web_queries=[topic, f"{topic} benchmark comparison"],
         )
